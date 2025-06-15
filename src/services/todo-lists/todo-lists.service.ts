@@ -11,6 +11,10 @@ class TodoListsService {
         return httpBaseApi.httpGet(`/todo-lists/${id}`)
     }
 
+    createList = async (data: object): Promise<TodoList> => {
+        return httpBaseApi.httpPost("/todo-lists", data)
+    }
+
 }
 
 const todoListsService = new TodoListsService();

@@ -1,14 +1,12 @@
-import CreateButton from "./CreateButton"
+import CreateListForm from "./CreateListForm"
 
 const CreateList = () => {
   return (
     <>
       <h1>Create a new list</h1>
       <div>
-        <h3>Form</h3>
-        <p>Input</p>
-        <p>Input</p>
-        <CreateButton />
+        <h3>Create a new list</h3>
+        <CreateListForm />
       </div>
 
     </>
