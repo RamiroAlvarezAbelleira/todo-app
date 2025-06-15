@@ -1,3 +1,4 @@
+import todoListsService from "@/services/todo-lists/todo-lists.service"
 import Link from "next/link"
 
 export const metadata = {
@@ -17,7 +18,12 @@ const mockLists = [
         title: "List 3"
     },
 ]
-const todoLists = () => {
+const todoLists = async () => {
+
+    const todoListsPromise = await todoListsService.getTodoLists()
+
+    console.log(todoListsPromise)
+
     return (
         <>
             <h1>To do Lists</h1>
