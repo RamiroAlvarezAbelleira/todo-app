@@ -20,11 +20,15 @@ const listDetail = async ({ params }: ListDetailProps) => {
   return (
     <>
       <h1>{todoList.title}</h1>
-      <h4>{todoList.description}</h4>
+      <h3>{todoList.description}</h3>
       <ul>
         {todoList?.tasks?.map(task => {
           return (
-            <li key={`${task.title}-${task.id}`}>{task.title}</li>
+            <li key={`${task.title}-${task.id}`}>
+              <h4>{task.title}</h4>
+              <p>{task.description}</p>
+              <p>{task.complete ? "complete" : "incomplete"}</p>
+            </li>
           )
         })}
       </ul>
