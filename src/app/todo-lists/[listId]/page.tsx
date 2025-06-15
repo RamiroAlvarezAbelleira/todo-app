@@ -1,3 +1,4 @@
+import todoListsService from "@/services/todo-lists/todo-lists.service"
 import { Metadata } from "next"
 
 type ListDetailProps = {
@@ -14,8 +15,20 @@ export const generateMetadata = async ({ params }: ListDetailProps): Promise<Met
 
 const listDetail = async ({ params }: ListDetailProps) => {
   const listId = (await params).listId
+
+  const todoList = await todoListsService.getTodoListById(listId)
   return (
-    <h1>List {listId} Details</h1>
+    <>
+      <h1>{todoList.title}</h1>
+      <h4>{todoList.description}</h4>
+      <ul>
+        {todoList?.tasks?.map(task => {
+          return (
+            <li key={`${task.title}-${task.id}`}>{task.title}</li>
+          )
+        })}
+      </ul>
+    </>
   )
 }
 
