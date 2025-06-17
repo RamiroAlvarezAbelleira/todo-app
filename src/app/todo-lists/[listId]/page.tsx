@@ -1,5 +1,6 @@
 import todoListsService from "@/services/todo-lists/todo-lists.service"
 import { Metadata } from "next"
+import CreateTaskForm from "./CreateTaskForm"
 
 type ListDetailProps = {
   params: Promise<{ listId: string }>
@@ -21,17 +22,7 @@ const listDetail = async ({ params }: ListDetailProps) => {
     <>
       <h1>{todoList.title}</h1>
       <h3>{todoList.description}</h3>
-      <ul>
-        {todoList?.tasks?.map(task => {
-          return (
-            <li key={`${task.title}-${task.id}`}>
-              <h4>{task.title}</h4>
-              <p>{task.description}</p>
-              <p>{task.complete ? "complete" : "incomplete"}</p>
-            </li>
-          )
-        })}
-      </ul>
+      <CreateTaskForm todo_list_id={listId} />
     </>
   )
 }

@@ -13,8 +13,7 @@ const CreateListForm = () => {
     const router = useRouter()
 
     const onSubmit = (data: FormData) => {
-        console.log("Submit func called: ", data)
-        todoListsService.createList({title: data.title, description: data.description})
+        todoListsService.createList({ title: data.title, description: data.description })
         resetField("title")
         resetField("description")
         router.push("/todo-lists")
