@@ -19,6 +19,9 @@ const CreateTaskForm = ({ todo_list_id }: CreateTaskFormProps) => {
     const { register, handleSubmit, resetField } = useForm<FormData>()
     const [tasks, setTasks] = useState<Task[]>([])
 
+    const completeStyle = "bg-[#32CD32] border-[#ffffffdd]"
+    const incompleteStyle = "bg-transparent border-[#aaaaaa44]"
+
     const onSubmit = async (data: FormData) => {
         const newTask = {
             title: data.title,
@@ -31,23 +34,39 @@ const CreateTaskForm = ({ todo_list_id }: CreateTaskFormProps) => {
         resetField("title")
         resetField("description")
     }
+
+    const toggleCompleteTask = (taskId: string) => {
+        setTasks(prevTasks => {
+            return prevTasks.map(task => {
+                if (task.id === taskId) {
+                    return { ...task, complete: !task.complete }
+                } else {
+                    return task
+                }
+            })
+        })
+    }
+
     const getTaskFunc = async () => {
         const res = await taskService.getTasksByTodoListId(todo_list_id)
         setTasks(res)
     }
+
     useEffect(() => {
         getTaskFunc()
     }, [])
 
     return (
         <>
-            <ul>
+            <ul className="flex flex-col p-[0px] gap-y-[8px]">
                 {tasks?.map(task => {
                     return (
-                        <li key={`${task.title}-${task.id}`}>
-                            <h4>{task.title}</h4>
-                            <p>{task.description}</p>
-                            <p>{task.complete ? "complete" : "incomplete"}</p>
+                        <li key={`${task.title}-${task.id}`} className="flex items-center gap-x-[8px]">
+                            <button
+                                onClick={() => toggleCompleteTask(task.id)}
+                                className={`p-[0px] rounded-full w-[20px] h-[20px] border border-[2px] ${task.complete ? completeStyle : incompleteStyle}`}
+                            ></button>
+                            <p className={`${task.complete ? "text-[#32CD32]" : "text-[#FFD700]"} m-[0px] font-[700]`}>{task.title}</p>
                         </li>
                     )
                 })}
