@@ -35,11 +35,12 @@ const CreateTaskForm = ({ todo_list_id }: CreateTaskFormProps) => {
         resetField("description")
     }
 
-    const toggleCompleteTask = (taskId: string) => {
+    const toggleCompleteTask = async (taskId: string) => {
+        await taskService.toggleCompleteTask(taskId)
         setTasks(prevTasks => {
             return prevTasks.map(task => {
                 if (task.id === taskId) {
-                    return { ...task, complete: !task.complete }
+                    return { ...task, completed: !task.completed }
                 } else {
                     return task
                 }
@@ -64,9 +65,9 @@ const CreateTaskForm = ({ todo_list_id }: CreateTaskFormProps) => {
                         <li key={`${task.title}-${task.id}`} className="flex items-center gap-x-[8px]">
                             <button
                                 onClick={() => toggleCompleteTask(task.id)}
-                                className={`p-[0px] rounded-full w-[20px] h-[20px] border border-[2px] ${task.complete ? completeStyle : incompleteStyle}`}
+                                className={`p-[0px] rounded-full w-[20px] h-[20px] border border-[2px] ${task.completed ? completeStyle : incompleteStyle}`}
                             ></button>
-                            <p className={`${task.complete ? "text-[#32CD32]" : "text-[#FFD700]"} m-[0px] font-[700]`}>{task.title}</p>
+                            <p className={`${task.completed ? "text-[#32CD32]" : "text-[#FFD700]"} m-[0px] font-[700]`}>{task.title}</p>
                         </li>
                     )
                 })}

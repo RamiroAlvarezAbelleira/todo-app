@@ -34,6 +34,23 @@ class HttpBaseApi {
 
         return res.json()
     }
+
+    async httpPut<T>(endpointSuffix: string, body?: object): Promise<T> {
+        const res = await fetch(`${BASE_API_URL}${endpointSuffix}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body ?? {})
+        })
+
+        if (!res.ok) {
+            console.log(`${res.status}: ${res?.statusText}`)
+            throw new Error(`Failed to Post: ${endpointSuffix}`);
+        }
+
+        return res.json()
+    }
 }
 
 const httpBaseApi = new HttpBaseApi()

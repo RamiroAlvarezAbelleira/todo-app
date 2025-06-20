@@ -2,6 +2,6 @@ export type Task = {
     id: string,
     title: string,
     description: string,
-    complete: boolean
+    completed: boolean
     todo_list_id: string,
 }

@@ -8,6 +8,9 @@ class TasksService {
     getTasksByTodoListId = async (listId: string): Promise<Task[]> => {
         return httpBaseApi.httpGet(`/tasks/${listId}`)
     }
+    toggleCompleteTask = async (taskId: string): Promise<Task> => {
+        return httpBaseApi.httpPut(`/tasks/toggle_complete/${taskId}`)
+    }
 }
 
 const taskService = new TasksService()
