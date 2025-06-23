@@ -11,6 +11,9 @@ class TasksService {
     toggleCompleteTask = async (taskId: string): Promise<Task> => {
         return httpBaseApi.httpPut(`/tasks/toggle_complete/${taskId}`)
     }
+    updateTask = async (taskId: string, data: object): Promise<Task> => {
+        return httpBaseApi.httpPut(`/tasks/${taskId}`, data)
+    }
 }
 
 const taskService = new TasksService()

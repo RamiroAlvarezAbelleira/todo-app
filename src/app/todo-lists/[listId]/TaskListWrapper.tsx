@@ -1,9 +1,9 @@
 "use client"
 
-import CreateTaskForm from "@/components/ui/CreateTaskForm/CreateTaskForm"
+import TaskForm from "@/components/ui/TaskForm/TaskForm"
 import TaskList from "@/components/ui/TaskList/TaskList"
 import taskService from "@/services/tasks/tasks.service"
-import { Task } from "@/types/task.types"
+import { Task, TaskFormData } from "@/types/task.types"
 import { useEffect, useState } from "react"
 
 type TaskListWrapperProps = {
@@ -19,6 +19,17 @@ const TaskListWrapper = ({ todo_list_id }: TaskListWrapperProps) => {
         setTasks(res)
     }
 
+    const createTaskFunc = async (data: TaskFormData) => {
+        const newTask = {
+            title: data.title,
+            description: data.description,
+            todo_list_id: todo_list_id
+        }
+        const res = await taskService.createTask(newTask)
+        let newTaskArr = [...tasks, res]
+        setTasks(newTaskArr)
+    }
+
     useEffect(() => {
         getTaskFunc()
     }, [])
@@ -29,10 +40,9 @@ const TaskListWrapper = ({ todo_list_id }: TaskListWrapperProps) => {
                 tasks={tasks}
                 setTasks={setTasks}
             />
-            <CreateTaskForm
-                tasks={tasks}
-                setTasks={setTasks}
-                todo_list_id={todo_list_id}
+            <TaskForm
+                onSubmit={createTaskFunc}
+                buttonLabel="Add"
             />
         </>
 

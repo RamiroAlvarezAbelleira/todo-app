@@ -9,17 +9,22 @@ type TaskListProps = {
 }
 const TaskList = ({ tasks, setTasks }: TaskListProps) => {
 
-    const toggleCompleteTask = async (taskId: string) => {
-        await taskService.toggleCompleteTask(taskId)
+    const updateTaskList = (newTask: Task) => {
+        console.log("From the list: ", newTask)
         setTasks(prevTasks => {
             return prevTasks.map(task => {
-                if (task.id === taskId) {
-                    return { ...task, completed: !task.completed }
+                if (task.id === newTask.id) {
+                    return newTask
                 } else {
                     return task
                 }
             })
         })
+    }
+
+    const toggleCompleteTask = async (newTask: Task) => {
+        const res = await taskService.toggleCompleteTask(newTask.id)
+        updateTaskList(res)
     }
 
     return (
@@ -28,8 +33,10 @@ const TaskList = ({ tasks, setTasks }: TaskListProps) => {
                 return (
                     <TaskCard
                         key={`${task.title}-${task.id}`}
-                        onClick={toggleCompleteTask}
+                        toggleCompleteTask={toggleCompleteTask}
                         title={task.title}
+                        task={task}
+                        updateTaskList={updateTaskList}
                         completed={task.completed}
                         id={task.id}
                     />
