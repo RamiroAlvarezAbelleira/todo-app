@@ -1,6 +1,6 @@
 import todoListsService from "@/services/todo-lists/todo-lists.service"
 import { Metadata } from "next"
-import CreateTaskForm from "./CreateTaskForm"
+import TaskListWrapper from "./TaskListWrapper"
 
 type ListDetailProps = {
   params: Promise<{ listId: string }>
@@ -22,7 +22,7 @@ const listDetail = async ({ params }: ListDetailProps) => {
     <>
       <h1>{todoList.title}</h1>
       <h3>{todoList.description}</h3>
-      <CreateTaskForm todo_list_id={listId} />
+      <TaskListWrapper todo_list_id={listId} />
     </>
   )
 }

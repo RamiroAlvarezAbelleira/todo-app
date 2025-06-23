@@ -1,5 +1,3 @@
-"use client"
-
 type TaskCardProps = {
     title: string,
     id: string,

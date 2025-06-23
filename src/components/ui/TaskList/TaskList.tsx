@@ -1,5 +1,3 @@
-"use client"
-
 import taskService from "@/services/tasks/tasks.service"
 import { Task } from "@/types/task.types"
 import { Dispatch, SetStateAction } from "react"
