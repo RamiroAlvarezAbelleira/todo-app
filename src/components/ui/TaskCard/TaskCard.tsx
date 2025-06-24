@@ -34,13 +34,14 @@ const TaskCard = ({ title, id, completed, toggleCompleteTask, updateTaskList, ta
             ></button>
             {
                 showUpdate ?
-                    <>
+                    <div className="flex items-end gap-x-[5px]">
                         <TaskForm
                             buttonLabel="Update"
                             onSubmit={updateTask}
+                            defaultValue={task.title}
                         />
                         <button onClick={() => setShowUpdate(false)}>Close</button>
-                    </>
+                    </div>
                     :
 
                     <button className={`m-[0px] font-[700]`} onClick={() => setShowUpdate(true)}>{task.title}</button>

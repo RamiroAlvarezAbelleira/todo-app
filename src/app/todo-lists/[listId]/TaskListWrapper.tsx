@@ -13,6 +13,7 @@ type TaskListWrapperProps = {
 const TaskListWrapper = ({ todo_list_id }: TaskListWrapperProps) => {
 
     const [tasks, setTasks] = useState<Task[]>([])
+    const [showCreate, setShowCreate] = useState(false)
 
     const getTaskFunc = async () => {
         const res = await taskService.getTasksByTodoListId(todo_list_id)
@@ -40,10 +41,18 @@ const TaskListWrapper = ({ todo_list_id }: TaskListWrapperProps) => {
                 tasks={tasks}
                 setTasks={setTasks}
             />
-            <TaskForm
-                onSubmit={createTaskFunc}
-                buttonLabel="Add"
-            />
+            {
+                showCreate ?
+                    <div className="flex items-end gap-x-[5px]">
+                        <TaskForm
+                            onSubmit={createTaskFunc}
+                            buttonLabel="Add"
+                        />
+                        <button onClick={() => setShowCreate(false)}>Cancel</button>
+                    </div>
+                    :
+                    <button onClick={() => setShowCreate(true)}>+ Add</button>
+            }
         </>
 
     )

@@ -10,7 +10,6 @@ type TaskListProps = {
 const TaskList = ({ tasks, setTasks }: TaskListProps) => {
 
     const updateTaskList = (newTask: Task) => {
-        console.log("From the list: ", newTask)
         setTasks(prevTasks => {
             return prevTasks.map(task => {
                 if (task.id === newTask.id) {
