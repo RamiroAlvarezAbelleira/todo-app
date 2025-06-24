@@ -14,6 +14,9 @@ class TasksService {
     updateTask = async (taskId: string, data: object): Promise<Task> => {
         return httpBaseApi.httpPut(`/tasks/${taskId}`, data)
     }
+    deleteTask = async (taskId: string): Promise<object> => {
+        return httpBaseApi.httpDelete(`/tasks/${taskId}`)
+    }
 }
 
 const taskService = new TasksService()

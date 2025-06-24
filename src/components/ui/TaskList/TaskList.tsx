@@ -9,21 +9,27 @@ type TaskListProps = {
 }
 const TaskList = ({ tasks, setTasks }: TaskListProps) => {
 
-    const updateTaskList = (newTask: Task) => {
-        setTasks(prevTasks => {
-            return prevTasks.map(task => {
-                if (task.id === newTask.id) {
-                    return newTask
-                } else {
-                    return task
-                }
+    const updateTaskList = (taskId: string, newTask?: Task) => {
+        console.log(newTask)
+        newTask ?
+            setTasks(prevTasks => {
+                return prevTasks.map(task => {
+                    if (task?.id === taskId) {
+                        return newTask
+                    } else {
+                        return task
+                    }
+                })
             })
-        })
+            :
+            setTasks(prevTasks => {
+                return prevTasks.filter(task => task.id !== taskId)
+            })
     }
 
     const toggleCompleteTask = async (newTask: Task) => {
         const res = await taskService.toggleCompleteTask(newTask.id)
-        updateTaskList(res)
+        updateTaskList(newTask.id, res)
     }
 
     return (

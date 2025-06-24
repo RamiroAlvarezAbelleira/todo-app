@@ -46,7 +46,23 @@ class HttpBaseApi {
 
         if (!res.ok) {
             console.log(`${res.status}: ${res?.statusText}`)
-            throw new Error(`Failed to Post: ${endpointSuffix}`);
+            throw new Error(`Failed to Put: ${endpointSuffix}`);
+        }
+
+        return res.json()
+    }
+
+    async httpDelete<T>(endpointSuffix: string): Promise<T> {
+        const res = await fetch(`${BASE_API_URL}${endpointSuffix}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+
+        if (!res.ok) {
+            console.log(`${res.status}: ${res?.statusText}`)
+            throw new Error(`Failed to Delete: ${endpointSuffix}`);
         }
 
         return res.json()

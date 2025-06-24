@@ -11,7 +11,7 @@ type TaskCardProps = {
     id: string,
     completed: boolean,
     toggleCompleteTask: (newTask: Task) => void,
-    updateTaskList: (newTask: Task) => void
+    updateTaskList: (taskId: string, newTask?: Task) => void
 }
 
 const TaskCard = ({ title, id, completed, toggleCompleteTask, updateTaskList, task }: TaskCardProps) => {
@@ -23,7 +23,13 @@ const TaskCard = ({ title, id, completed, toggleCompleteTask, updateTaskList, ta
     const updateTask = async (data: TaskFormData) => {
         const res = await taskService.updateTask(task.id, data)
         setShowUpdate(false)
-        updateTaskList(res)
+        updateTaskList(task.id, res)
+    }
+
+    const deleteTask = async (taskId: string) => {
+        await taskService.deleteTask(taskId)
+        setShowUpdate(false)
+        updateTaskList(taskId)
     }
 
     return (
@@ -40,6 +46,7 @@ const TaskCard = ({ title, id, completed, toggleCompleteTask, updateTaskList, ta
                             onSubmit={updateTask}
                             defaultValue={task.title}
                         />
+                        <button onClick={() => deleteTask(task.id)}>Delete</button>
                         <button onClick={() => setShowUpdate(false)}>Close</button>
                     </div>
                     :
