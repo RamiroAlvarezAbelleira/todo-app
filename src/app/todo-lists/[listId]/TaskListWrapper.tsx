@@ -4,6 +4,7 @@ import TaskForm from "@/components/ui/TaskForm/TaskForm"
 import TaskList from "@/components/ui/TaskList/TaskList"
 import taskService from "@/services/tasks/tasks.service"
 import { Task, TaskFormData } from "@/types/task.types"
+import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 
 type TaskListWrapperProps = {
@@ -11,6 +12,8 @@ type TaskListWrapperProps = {
 }
 
 const TaskListWrapper = ({ todo_list_id }: TaskListWrapperProps) => {
+
+    const router = useRouter()
 
     const [tasks, setTasks] = useState<Task[]>([])
     const [showCreate, setShowCreate] = useState(false)
@@ -20,6 +23,9 @@ const TaskListWrapper = ({ todo_list_id }: TaskListWrapperProps) => {
         setTasks(res)
     }
 
+    const goBack = () => {
+        router.back()
+    }
     const createTaskFunc = async (data: TaskFormData) => {
         const newTask = {
             title: data.title,
@@ -37,6 +43,7 @@ const TaskListWrapper = ({ todo_list_id }: TaskListWrapperProps) => {
 
     return (
         <>
+            <button onClick={() => goBack()}>Go Back</button>
             <TaskList
                 tasks={tasks}
                 setTasks={setTasks}

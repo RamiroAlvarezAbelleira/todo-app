@@ -55,12 +55,12 @@ const TodoListsList = ({ todoLists }: TodoListsListProps) => {
                     :
                     <p>No hay listas</p>
             }
-            <li>
+            <li className="mt-2">
                 {
                     showCreate ?
                         <ListForm buttonLabel="Add" onSubmit={addNewTodoList} setShowState={setShowCreate} />
                         :
-                        <button onClick={() => setShowCreate(true)}>Add+</button>
+                        <button className="px-2 py-0.5 bg-white rounded hover:bg-gray-100 transition-all duration-200" onClick={() => setShowCreate(true)}>Add+</button>
                 }
             </li>
         </ul>

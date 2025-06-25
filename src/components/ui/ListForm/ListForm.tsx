@@ -22,7 +22,7 @@ const ListForm = ({ onSubmit, buttonLabel, defaultValue, setShowState }: ListFor
     return (
         <form onSubmit={handleSubmit(onSubmitLocal)} className="flex flex-col">
             <input
-                className="border border-gray-300 px-2 rounded"
+                className="bg-white border border-gray-300 px-2 rounded"
                 type="text"
                 id="listTitle"
                 placeholder="Title"

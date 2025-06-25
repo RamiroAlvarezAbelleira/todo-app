@@ -12,20 +12,22 @@ export const metadata: Metadata = {
     description: 'This is a basic Todo app created with nextjs'
 }
 
-export default function RootLayout({
-    children,
-}: {
+type RootLayoutProps = {
     children: React.ReactNode
-}) {
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
     return (
         <html lang="en">
             <body>
-                <header>
-                    <h3>Header</h3>
+                <header className="flex gap-x-2 items-end justify-between px-4 py-0">
+                    <h3 className="text-2xl font-bold text-blue-400">Todo App</h3>
                     <Nav />
                 </header>
                 {children}
-                <footer>Footer</footer>
+                <footer>
+                    <h6>Todo App inc.</h6>
+                </footer>
             </body>
         </html>
     )

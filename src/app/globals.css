@@ -9,6 +9,11 @@ button {
 }
 
 a {
-    color: #000;
     text-decoration: none;
+}
+
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
