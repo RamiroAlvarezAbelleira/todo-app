@@ -54,10 +54,7 @@ class HttpBaseApi {
 
     async httpDelete<T>(endpointSuffix: string): Promise<T> {
         const res = await fetch(`${BASE_API_URL}${endpointSuffix}`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json"
-            }
+            method: "DELETE"
         })
 
         if (!res.ok) {

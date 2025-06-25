@@ -6,3 +6,9 @@ export type TodoList = {
     description: string,
     tasks?: Task[]
 }
+
+export type TodoListFormData = {
+    id?: string,
+    title: string,
+    description: string
+}

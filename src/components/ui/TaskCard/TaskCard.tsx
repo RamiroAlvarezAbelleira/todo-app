@@ -7,14 +7,11 @@ import taskService from "@/services/tasks/tasks.service"
 
 type TaskCardProps = {
     task: Task
-    title: string,
-    id: string,
-    completed: boolean,
     toggleCompleteTask: (newTask: Task) => void,
     updateTaskList: (taskId: string, newTask?: Task) => void
 }
 
-const TaskCard = ({ title, id, completed, toggleCompleteTask, updateTaskList, task }: TaskCardProps) => {
+const TaskCard = ({ toggleCompleteTask, updateTaskList, task }: TaskCardProps) => {
     const [showUpdate, setShowUpdate] = useState(false)
 
     const completeStyle = "bg-[#32CD32] border-[#ffffffdd]"
@@ -51,7 +48,7 @@ const TaskCard = ({ title, id, completed, toggleCompleteTask, updateTaskList, ta
                     </div>
                     :
 
-                    <button className={`m-[0px] font-[700]`} onClick={() => setShowUpdate(true)}>{task.title}</button>
+                    <button className={`m-0 font-bold`} onClick={() => setShowUpdate(true)}>{task.title}</button>
             }
         </li>
     )

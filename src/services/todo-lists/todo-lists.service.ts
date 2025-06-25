@@ -15,6 +15,14 @@ class TodoListsService {
         return httpBaseApi.httpPost("/todo-lists", data)
     }
 
+    updateList = async (id: string, data: object): Promise<TodoList> => {
+        return httpBaseApi.httpPut(`/todo-lists/${id}`, data)
+    }
+
+    deleteList = async (id: string): Promise<object> => {
+        return httpBaseApi.httpDelete(`/todo-lists/${id}`)
+    }
+
 }
 
 const todoListsService = new TodoListsService();

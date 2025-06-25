@@ -10,7 +10,6 @@ type TaskListProps = {
 const TaskList = ({ tasks, setTasks }: TaskListProps) => {
 
     const updateTaskList = (taskId: string, newTask?: Task) => {
-        console.log(newTask)
         newTask ?
             setTasks(prevTasks => {
                 return prevTasks.map(task => {
@@ -39,11 +38,8 @@ const TaskList = ({ tasks, setTasks }: TaskListProps) => {
                     <TaskCard
                         key={`${task.title}-${task.id}`}
                         toggleCompleteTask={toggleCompleteTask}
-                        title={task.title}
                         task={task}
                         updateTaskList={updateTaskList}
-                        completed={task.completed}
-                        id={task.id}
                     />
                 )
             })}
