@@ -1,6 +1,5 @@
-import React from "react"
 import { Metadata } from "next"
-import Link from "next/link"
+import React from "react"
 import "./globals.css"
 import Nav from "./nav"
 

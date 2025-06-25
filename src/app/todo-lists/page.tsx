@@ -1,3 +1,4 @@
+import ListCard from "@/components/ui/ListCard/ListCard"
 import todoListsService from "@/services/todo-lists/todo-lists.service"
 import Link from "next/link"
 
@@ -15,7 +16,10 @@ const todoLists = async () => {
             <ul>
                 {todoLists.map(list => {
                     return (
-                        <li key={`${list.title}-${list.id}`}><Link href={`/todo-lists/${list?.id}`}>{list.title}</Link></li>
+                        <ListCard
+                            key={`${list.title}-${list.id}`}
+                            list={list}
+                        />
                     )
                 })}
             </ul>
