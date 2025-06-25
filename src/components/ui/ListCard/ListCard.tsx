@@ -28,26 +28,29 @@ const ListCard = ({ list, updateListState }: ListCardProps) => {
     }
 
     return (
-        <li className="group hover:bg-gray-300 px-2 rounded py-1 transition-all duration-300 flex gap-x-2">
+        <li>
             {
                 showUpdate ?
-                    <ListForm onSubmit={updateTodoList} buttonLabel="Update" defaultValue={list?.title} />
+                    <ListForm onSubmit={updateTodoList} buttonLabel="Update" defaultValue={list?.title} setShowState={setShowUpdate} />
                     :
-                    <Link href={`/todo-lists/${list?.id}`}>
-                        <span className="group-hover:text-white transition-all duration-300">{list.title}</span>
-                    </Link>
+                    <div className="flex justify-between gap-x-2 group hover:bg-gray-300 px-2 rounded py-1 transition-all duration-300">
+                        <Link href={`/todo-lists/${list?.id}`}>
+                            <span className="group-hover:text-white transition-all duration-300">{list.title}</span>
+                        </Link>
+                        <div className="flex gap-x-2">
+                            <button
+                                onClick={() => setShowUpdate(true)}
+                                className="opacity-0 group-hover:opacity-100 group-hover:text-white cursor-pointer active:bg-white active:text-black  transition-all duration-300">
+                                Edit
+                            </button>
+                            <button
+                                onClick={() => deleteTodoList(list.id)}
+                                className="opacity-0 group-hover:opacity-100 group-hover:text-white cursor-pointer active:bg-white active:text-black  transition-all duration-300">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
             }
-
-            <button
-                onClick={() => setShowUpdate(true)}
-                className="opacity-0 group-hover:opacity-100 group-hover:text-white cursor-pointer active:bg-white active:text-black  transition-all duration-300">
-                Edit
-            </button>
-            <button
-                onClick={() => deleteTodoList(list.id)}
-                className="opacity-0 group-hover:opacity-100 group-hover:text-white cursor-pointer active:bg-white active:text-black  transition-all duration-300">
-                Delete
-            </button>
         </li>
     )
 }

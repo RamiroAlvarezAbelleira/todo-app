@@ -4,6 +4,10 @@ li {
     list-style-type: none;
 }
 
+button {
+    @apply cursor-pointer
+}
+
 a {
     color: #000;
     text-decoration: none;

@@ -1,13 +1,15 @@
 import { TodoListFormData } from "@/types/todo-list.types"
+import { Dispatch, SetStateAction } from "react"
 import { useForm } from "react-hook-form"
 
 
 type ListFormProps = {
     onSubmit: (data: TodoListFormData) => void,
     buttonLabel: string,
-    defaultValue?: string
+    defaultValue?: string,
+    setShowState: Dispatch<SetStateAction<boolean>>
 }
-const ListForm = ({ onSubmit, buttonLabel, defaultValue }: ListFormProps) => {
+const ListForm = ({ onSubmit, buttonLabel, defaultValue, setShowState }: ListFormProps) => {
 
     const onSubmitLocal = (data: TodoListFormData) => {
         onSubmit(data)
@@ -18,16 +20,15 @@ const ListForm = ({ onSubmit, buttonLabel, defaultValue }: ListFormProps) => {
     const { register, handleSubmit, resetField } = useForm<TodoListFormData>()
 
     return (
-        <form onSubmit={handleSubmit(onSubmitLocal)} className="flex items-end gap-x-[5px]">
-            <div className="flex flex-col">
-                <label htmlFor="listTitle">Title</label>
-                <input
-                    type="text"
-                    id="listTitle"
-                    {...register("title")}
-                    defaultValue={defaultValue ?? ""}
-                />
-            </div>
+        <form onSubmit={handleSubmit(onSubmitLocal)} className="flex flex-col">
+            <input
+                className="border border-gray-300 px-2 rounded"
+                type="text"
+                id="listTitle"
+                placeholder="Title"
+                {...register("title")}
+                defaultValue={defaultValue ?? ""}
+            />
             <div className="hidden">
                 <label htmlFor="listDescription">Description</label>
                 <input
@@ -36,7 +37,10 @@ const ListForm = ({ onSubmit, buttonLabel, defaultValue }: ListFormProps) => {
                     {...register("description")}
                 />
             </div>
-            <button type="submit" className="h-fit">{buttonLabel}</button>
+            <div className="flex gap-x-2">
+                <button type="submit" className="h-fit">{buttonLabel}</button>
+                <button onClick={() => setShowState(false)}>Cancel</button>
+            </div>
         </form>
     )
 }

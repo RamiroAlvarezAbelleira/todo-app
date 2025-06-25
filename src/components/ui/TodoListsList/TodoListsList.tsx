@@ -4,6 +4,7 @@ import { TodoList, TodoListFormData } from "@/types/todo-list.types"
 import ListCard from "../ListCard/ListCard"
 import { useState } from "react"
 import todoListsService from "@/services/todo-lists/todo-lists.service"
+import ListForm from "../ListForm/ListForm"
 
 type TodoListsListProps = {
     todoLists?: TodoList[]
@@ -31,8 +32,11 @@ const TodoListsList = ({ todoLists }: TodoListsListProps) => {
 
     }
 
-    const addNewTodoList = async () => {
-
+    const addNewTodoList = async (data: TodoListFormData) => {
+        const res = await todoListsService.createList(data)
+        const newLists = [...localLists, res]
+        setLocalLists(newLists)
+        setShowCreate(false)
     }
 
     return (
@@ -51,6 +55,14 @@ const TodoListsList = ({ todoLists }: TodoListsListProps) => {
                     :
                     <p>No hay listas</p>
             }
+            <li>
+                {
+                    showCreate ?
+                        <ListForm buttonLabel="Add" onSubmit={addNewTodoList} setShowState={setShowCreate} />
+                        :
+                        <button onClick={() => setShowCreate(true)}>Add+</button>
+                }
+            </li>
         </ul>
     )
 }
