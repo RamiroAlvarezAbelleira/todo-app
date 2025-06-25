@@ -9,10 +9,16 @@ type ListCardProps = {
 
 const ListCard = ({ list }: ListCardProps) => {
     return (
-        <li className="hover:bg-black transition-all duration-300">
-            <Link href={`/todo-lists/${list?.id}`} className="hover:text-white">
-                {list.title}
+        <li className="group hover:bg-gray-300 px-2 rounded py-1 transition-all duration-300 flex gap-x-2">
+            <Link href={`/todo-lists/${list?.id}`}>
+                <span className="group-hover:text-white transition-all duration-300">{list.title}</span>
             </Link>
+            <button className="opacity-0 group-hover:opacity-100 group-hover:text-white cursor-pointer active:bg-white active:text-black  transition-all duration-300">
+                Edit
+            </button>
+            <button className="opacity-0 group-hover:opacity-100 group-hover:text-white cursor-pointer active:bg-white active:text-black  transition-all duration-300">
+                Delete
+            </button>
         </li>
     )
 }

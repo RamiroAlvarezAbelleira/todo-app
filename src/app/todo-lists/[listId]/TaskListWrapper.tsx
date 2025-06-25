@@ -43,7 +43,7 @@ const TaskListWrapper = ({ todo_list_id }: TaskListWrapperProps) => {
             />
             {
                 showCreate ?
-                    <div className="flex items-end gap-x-[5px]">
+                    <div className="flex items-end gap-x-2">
                         <TaskForm
                             onSubmit={createTaskFunc}
                             buttonLabel="Add"

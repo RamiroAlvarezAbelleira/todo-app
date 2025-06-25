@@ -40,7 +40,7 @@ const TaskCard = ({ title, id, completed, toggleCompleteTask, updateTaskList, ta
             ></button>
             {
                 showUpdate ?
-                    <div className="flex items-end gap-x-[5px]">
+                    <div className="flex items-end gap-x-2">
                         <TaskForm
                             buttonLabel="Update"
                             onSubmit={updateTask}
