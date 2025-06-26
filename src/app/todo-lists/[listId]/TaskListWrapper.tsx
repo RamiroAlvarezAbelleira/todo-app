@@ -50,13 +50,11 @@ const TaskListWrapper = ({ todo_list_id }: TaskListWrapperProps) => {
             />
             {
                 showCreate ?
-                    <div className="flex items-end gap-x-2">
-                        <TaskForm
-                            onSubmit={createTaskFunc}
-                            buttonLabel="Add"
-                        />
-                        <button onClick={() => setShowCreate(false)}>Cancel</button>
-                    </div>
+                    <TaskForm
+                        onSubmit={createTaskFunc}
+                        buttonLabel="Add"
+                        setShowState={setShowCreate}
+                    />
                     :
                     <button onClick={() => setShowCreate(true)}>+ Add</button>
             }

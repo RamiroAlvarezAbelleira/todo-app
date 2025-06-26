@@ -30,10 +30,10 @@ const TaskCard = ({ toggleCompleteTask, updateTaskList, task }: TaskCardProps) =
     }
 
     return (
-        <li className="flex items-center gap-x-[8px]">
+        <li className="flex items-center">
             <button
                 onClick={() => toggleCompleteTask(task)}
-                className={`p-[0px] rounded-full w-[20px] h-[20px] border border-[2px] ${task.completed ? completeStyle : incompleteStyle}`}
+                className={`mr-1 rounded-full w-[20px] h-[20px] border border-[2px] ${task.completed ? completeStyle : incompleteStyle}`}
             ></button>
             {
                 showUpdate ?
@@ -42,13 +42,17 @@ const TaskCard = ({ toggleCompleteTask, updateTaskList, task }: TaskCardProps) =
                             buttonLabel="Update"
                             onSubmit={updateTask}
                             defaultValue={task.title}
+                            setShowState={setShowUpdate}
                         />
-                        <button onClick={() => deleteTask(task.id)}>Delete</button>
-                        <button onClick={() => setShowUpdate(false)}>Close</button>
                     </div>
                     :
-
-                    <button className={`m-0 font-bold`} onClick={() => setShowUpdate(true)}>{task.title}</button>
+                    <div className="flex px-2 py-1 items-center group hover:bg-gray-100 rounded gap-x-2">
+                        <p className="cursor-pointer">{task.title}</p>
+                        <div className="hidden group-hover:flex gap-x-2">
+                            <button onClick={() => setShowUpdate(true)}>Edit</button>
+                            <button onClick={() => deleteTask(task.id)}>Delete</button>
+                        </div>
+                    </div>
             }
         </li>
     )
