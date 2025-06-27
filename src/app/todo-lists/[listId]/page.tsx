@@ -20,9 +20,7 @@ const listDetail = async ({ params }: ListDetailProps) => {
   const todoList = await todoListsService.getTodoListById(listId)
   return (
     <>
-      <h1>{todoList.title}</h1>
-      <h3>{todoList.description}</h3>
-      <TaskListWrapper todo_list_id={listId} />
+      <TaskListWrapper todo_list_id={listId} title={todoList.title} />
     </>
   )
 }

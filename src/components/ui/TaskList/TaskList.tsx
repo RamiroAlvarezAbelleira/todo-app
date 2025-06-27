@@ -32,7 +32,7 @@ const TaskList = ({ tasks, setTasks }: TaskListProps) => {
     }
 
     return (
-        <ul className="flex flex-col p-[0px] gap-y-0">
+        <ul className="flex flex-col p-[0px] gap-y-0 w-full">
             {tasks?.map(task => {
                 return (
                     <TaskCard

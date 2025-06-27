@@ -34,7 +34,7 @@ const ListCard = ({ list, updateListState }: ListCardProps) => {
                     <ListForm onSubmit={updateTodoList} buttonLabel="Update" defaultValue={list?.title} setShowState={setShowUpdate} />
                     :
                     <div className="flex justify-between gap-x-2 group hover:bg-white px-2 rounded py-1 transition-all duration-300">
-                        <Link href={`/todo-lists/${list?.id}`} className="w-full truncate group-hover:w-[50%] transition-all duration-300">
+                        <Link href={`/todo-lists/${list?.id}`} className="w-full py-0.5 truncate group-hover:w-[50%] transition-all duration-300">
                             <span>{list.title}</span>
                         </Link>
                         <div className="flex">
