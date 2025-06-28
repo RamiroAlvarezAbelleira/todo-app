@@ -1,10 +1,10 @@
 "use client"
 
-import { useState } from "react"
-import TaskForm from "../TaskForm/TaskForm"
-import { Task, TaskFormData } from "@/types/task.types"
 import taskService from "@/services/tasks/tasks.service"
-import Image from "next/image"
+import { Task, TaskFormData } from "@/types/task.types"
+import { useState } from "react"
+import Check from "../Icons/Check"
+import TaskForm from "../TaskForm/TaskForm"
 
 type TaskCardProps = {
     task: Task
@@ -37,7 +37,7 @@ const TaskCard = ({ toggleCompleteTask, updateTaskList, task }: TaskCardProps) =
                 className={`flex items-center justify-center mr-1 rounded-full w-[20px] h-[20px] border border-[2px] ${task.completed ? completeStyle : incompleteStyle}`}
             >
                 {task.completed &&
-                    <Image src="/icons/check.svg" alt="Check icon" width={"100"} height={"100"} className="text-gray-300 group-hover:text-white" />
+                    <Check className="text-gray-200 group-hover:text-white" w="80%" h="80%" />
                 }
             </button>
             {
