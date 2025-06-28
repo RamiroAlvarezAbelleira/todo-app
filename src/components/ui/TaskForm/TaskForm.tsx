@@ -3,6 +3,8 @@
 import { TaskFormData } from "@/types/task.types"
 import { Dispatch, SetStateAction } from "react"
 import { useForm } from "react-hook-form"
+import Check from "../Icons/Check"
+import Cross from "../Icons/Cross"
 
 type TaskFormProps = {
     buttonLabel: string,
@@ -35,8 +37,12 @@ const TaskForm = ({ onSubmit, buttonLabel, defaultValue, setShowState }: TaskFor
                 <input type="text" {...register("description")} />
             </div>
             <div className="flex gap-x-2">
-                <button type="submit" className="h-fit">{buttonLabel}</button>
-                <button onClick={() => setShowState(false)}>Cancel</button>
+                <button type="submit" className="p-0.5 bg-gray-200 rounded group hover:bg-gray-100">
+                    <Check className="text-green-600 group-hover:text-green-500" />
+                </button>
+                <button onClick={() => setShowState(false)} className="p-0.5 bg-gray-200 rounded group hover:bg-gray-100">
+                    <Cross className="text-red-600 group-hover:text-red-500" />
+                </button>
             </div>
         </form>
     )

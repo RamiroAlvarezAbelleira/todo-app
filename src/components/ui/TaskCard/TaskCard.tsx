@@ -42,7 +42,7 @@ const TaskCard = ({ toggleCompleteTask, updateTaskList, task }: TaskCardProps) =
             </button>
             {
                 showUpdate ?
-                    <div className="flex py-[5px] bg-white rounded items-center w-full">
+                    <div className="flex py-[5px] bg-gray-200 rounded items-center w-full">
                         <TaskForm
                             buttonLabel="Update"
                             onSubmit={updateTask}
