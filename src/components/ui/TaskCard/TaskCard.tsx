@@ -4,6 +4,7 @@ import { useState } from "react"
 import TaskForm from "../TaskForm/TaskForm"
 import { Task, TaskFormData } from "@/types/task.types"
 import taskService from "@/services/tasks/tasks.service"
+import Image from "next/image"
 
 type TaskCardProps = {
     task: Task
@@ -36,31 +37,12 @@ const TaskCard = ({ toggleCompleteTask, updateTaskList, task }: TaskCardProps) =
                 className={`flex items-center justify-center mr-1 rounded-full w-[20px] h-[20px] border border-[2px] ${task.completed ? completeStyle : incompleteStyle}`}
             >
                 {task.completed &&
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                        width="80%"
-                        height="80%"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="icon icon-tabler icons-tabler-outline icon-tabler-check text-gray-300 group-hover:text-white"
-                    >
-                        <path
-                            stroke="none"
-                            d="M0 0h24v24H0z"
-                            fill="none"
-                        />
-                        <path
-                            d="M5 12l5 5l10 -10"
-                        />
-                    </svg>
+                    <Image src="/icons/check.svg" alt="Check icon" width={"100"} height={"100"} className="text-gray-300 group-hover:text-white" />
                 }
             </button>
             {
                 showUpdate ?
-                    <div className="flex items-end gap-x-2">
+                    <div className="flex py-[5px] bg-white rounded items-center w-full">
                         <TaskForm
                             buttonLabel="Update"
                             onSubmit={updateTask}

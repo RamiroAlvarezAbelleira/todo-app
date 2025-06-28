@@ -21,7 +21,7 @@ const TaskForm = ({ onSubmit, buttonLabel, defaultValue, setShowState }: TaskFor
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmitLocal)} className="flex items-end gap-x-2">
+        <form onSubmit={handleSubmit(onSubmitLocal)} className="flex w-full px-2 items-center justify-between gap-x-2">
             <div className="flex">
                 <input
                     placeholder="Task..."
