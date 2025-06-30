@@ -42,7 +42,7 @@ const TodoListsList = ({ todoLists }: TodoListsListProps) => {
     }
 
     return (
-        <ul>
+        <ul className="">
             {
                 localLists.length > 0 ?
                     localLists.map(list => {
