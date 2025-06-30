@@ -5,6 +5,8 @@ import Link from "next/link"
 import { useState } from "react"
 import todoListsService from "@/services/todo-lists/todo-lists.service"
 import ListForm from "../ListForm/ListForm"
+import Delete from "../../Icons/Delete"
+import Edit from "../../Icons/Edit"
 
 type ListCardProps = {
     list: TodoList
@@ -37,16 +39,16 @@ const ListCard = ({ list, updateListState }: ListCardProps) => {
                         <Link href={`/todo-lists/${list?.id}`} className="w-full py-0.5 truncate group-hover:w-[50%] transition-all duration-300">
                             <span>{list.title}</span>
                         </Link>
-                        <div className="flex">
+                        <div className="hidden group-hover:flex gap-x-2">
                             <button
                                 onClick={() => setShowUpdate(true)}
-                                className="hidden group-hover:flex px-2 py-0.5 bg-white rounded hover:bg-gray-100">
-                                Edit
+                                className="p-0.5 bg-white rounded hover:bg-gray-100">
+                                <Edit />
                             </button>
                             <button
                                 onClick={() => deleteTodoList(list.id)}
-                                className="hidden group-hover:flex px-2 py-0.5 bg-white rounded hover:bg-gray-100">
-                                Delete
+                                className="p-0.5 bg-white rounded hover:bg-gray-100">
+                                <Delete className="text-red-600" />
                             </button>
                         </div>
                     </div>

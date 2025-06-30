@@ -11,7 +11,7 @@ const MainLayout = async ({ children }: MainLayoutProps) => {
     const todoLists = await todoListsService.getTodoLists()
     return (
         <div className="flex w-full">
-            <nav className="py-3 px-2 bg-gray-200 w-[18vw] h-[80vh] rounded-tr-xl rounded-br-xl">
+            <nav className="py-3 px-2 bg-gray-100 w-[18vw] h-[80vh] rounded-tr-xl rounded-br-xl">
                 <h3 className="text-xl font-bold mb-2">Todo Lists</h3>
                 <TodoListsList todoLists={todoLists} />
             </nav>
