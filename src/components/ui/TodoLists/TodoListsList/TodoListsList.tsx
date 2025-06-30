@@ -1,10 +1,12 @@
 "use client"
 
 import { TodoList, TodoListFormData } from "@/types/todo-list.types"
-import ListCard from "../ListCard/ListCard"
 import { useState } from "react"
 import todoListsService from "@/services/todo-lists/todo-lists.service"
 import ListForm from "../ListForm/ListForm"
+import Plus from "../../Icons/Plus"
+import ListCard from "../ListCard/ListCard"
+import AddButton from "../../Buttons/AddButton"
 
 type TodoListsListProps = {
     todoLists?: TodoList[]
@@ -60,7 +62,7 @@ const TodoListsList = ({ todoLists }: TodoListsListProps) => {
                     showCreate ?
                         <ListForm buttonLabel="Add" onSubmit={addNewTodoList} setShowState={setShowCreate} />
                         :
-                        <button className="px-2 py-0.5 bg-white rounded hover:bg-gray-100 transition-all duration-200" onClick={() => setShowCreate(true)}>Add+</button>
+                        <AddButton setShowState={setShowCreate} />
                 }
             </li>
         </ul>

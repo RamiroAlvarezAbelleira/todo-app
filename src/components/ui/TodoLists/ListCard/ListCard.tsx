@@ -3,8 +3,8 @@
 import { TodoList, TodoListFormData } from "@/types/todo-list.types"
 import Link from "next/link"
 import { useState } from "react"
-import ListForm from "../ListForm/ListForm"
 import todoListsService from "@/services/todo-lists/todo-lists.service"
+import ListForm from "../ListForm/ListForm"
 
 type ListCardProps = {
     list: TodoList

@@ -1,4 +1,4 @@
-import TodoListsList from "@/components/ui/TodoListsList/TodoListsList"
+import TodoListsList from "@/components/ui/TodoLists/TodoListsList/TodoListsList"
 import todoListsService from "@/services/todo-lists/todo-lists.service"
 import React from "react"
 

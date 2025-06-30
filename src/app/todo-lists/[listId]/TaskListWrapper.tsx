@@ -1,7 +1,9 @@
 "use client"
 
-import TaskForm from "@/components/ui/TaskForm/TaskForm"
-import TaskList from "@/components/ui/TaskList/TaskList"
+import AddButton from "@/components/ui/Buttons/AddButton"
+import Plus from "@/components/ui/Icons/Plus"
+import TaskForm from "@/components/ui/Tasks/TaskForm/TaskForm"
+import TaskList from "@/components/ui/Tasks/TaskList/TaskList"
 import taskService from "@/services/tasks/tasks.service"
 import { Task, TaskFormData } from "@/types/task.types"
 import { useRouter } from "next/navigation"
@@ -88,26 +90,7 @@ const TaskListWrapper = ({ todo_list_id, title }: TaskListWrapperProps) => {
                             setShowState={setShowCreate}
                         />
                         :
-                        <button
-                            className="flex items-center gap-x-1 px-2 mt-2 py-0.5 bg-white rounded hover:bg-gray-100 transition-all duration-200"
-                            onClick={() => setShowCreate(true)}>
-                            <span>Add</span>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="18"
-                                height="18"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                className="icon icon-tabler icons-tabler-outline icon-tabler-plus">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path d="M12 5l0 14" />
-                                <path d="M5 12l14 0" />
-                            </svg>
-                        </button>
+                        <AddButton setShowState={setShowCreate} />
                 }
             </div>
         </section>

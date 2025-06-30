@@ -3,8 +3,8 @@
 import { TaskFormData } from "@/types/task.types"
 import { Dispatch, SetStateAction } from "react"
 import { useForm } from "react-hook-form"
-import Check from "../Icons/Check"
-import Cross from "../Icons/Cross"
+import Check from "../../Icons/Check"
+import Cross from "../../Icons/Cross"
 
 type TaskFormProps = {
     buttonLabel: string,

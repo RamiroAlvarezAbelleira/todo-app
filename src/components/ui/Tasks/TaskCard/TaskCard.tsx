@@ -3,8 +3,8 @@
 import taskService from "@/services/tasks/tasks.service"
 import { Task, TaskFormData } from "@/types/task.types"
 import { useState } from "react"
-import Check from "../Icons/Check"
 import TaskForm from "../TaskForm/TaskForm"
+import Check from "../../Icons/Check"
 
 type TaskCardProps = {
     task: Task

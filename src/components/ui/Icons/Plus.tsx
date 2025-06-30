@@ -1,6 +1,6 @@
 import { IconProps } from "@/types/icon-props.types"
 
-const Cross = ({ className, w, h }: IconProps) => {
+const Plus = ({ className, w, h }: IconProps) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -12,12 +12,12 @@ const Cross = ({ className, w, h }: IconProps) => {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className={`icon icon-tabler icons-tabler-outline icon-tabler-x ${className ?? ""}`}>
+            className={`icon icon-tabler icons-tabler-outline icon-tabler-plus ${className ?? ""}`}>
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path d="M18 6l-12 12" />
-            <path d="M6 6l12 12" />
+            <path d="M12 5l0 14" />
+            <path d="M5 12l14 0" />
         </svg>
     )
 }
 
-export default Cross
+export default Plus

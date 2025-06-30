@@ -1,11 +1,6 @@
+import { IconProps } from "@/types/icon-props.types"
 
-type CheckProps = {
-    className?: string,
-    w?: string,
-    h?: string
-}
-
-const Check = ({ className, w, h }: CheckProps) => {
+const Check = ({ className, w, h }: IconProps) => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg"
             width={`${w ?? "24"}`}
