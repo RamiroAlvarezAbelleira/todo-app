@@ -19,12 +19,14 @@ type RootLayoutProps = {
 export default function RootLayout({ children }: RootLayoutProps) {
     return (
         <html lang="en">
-            <body>
+            <body className="min-h-screen grid grid-rows-[auto_1fr_auto]">
                 <header className="flex gap-x-2 items-end justify-between px-4 py-0">
                     <h3 className="text-2xl font-bold text-blue-400">Todo App</h3>
                     <Nav />
                 </header>
-                {children}
+                <div>
+                    {children}
+                </div>
                 <footer>
                     <h6>Todo App inc.</h6>
                 </footer>
