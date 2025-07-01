@@ -33,16 +33,24 @@ const TaskList = ({ tasks, setTasks }: TaskListProps) => {
 
     return (
         <ul className="flex flex-col p-[0px] gap-y-0 w-full">
-            {tasks?.map(task => {
-                return (
-                    <TaskCard
-                        key={`${task.title}-${task.id}`}
-                        toggleCompleteTask={toggleCompleteTask}
-                        task={task}
-                        updateTaskList={updateTaskList}
-                    />
-                )
-            })}
+            {tasks?.length > 0 ?
+
+                tasks?.map(task => {
+                    return (
+                        <TaskCard
+                            key={`${task.title}-${task.id}`}
+                            toggleCompleteTask={toggleCompleteTask}
+                            task={task}
+                            updateTaskList={updateTaskList}
+                        />
+                    )
+                })
+                :
+                <div className="flex flex-col items-center justify-center w-full rounded bg-white py-2">
+                    <span className="text-m font-semibold">Aun no tenes Tareas</span>
+                    <span className="text-xs">Agrega tu primer tarea</span>
+                </div>
+            }
         </ul>
     )
 }
