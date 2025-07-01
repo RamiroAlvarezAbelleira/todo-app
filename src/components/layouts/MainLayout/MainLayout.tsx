@@ -10,14 +10,14 @@ const MainLayout = async ({ children }: MainLayoutProps) => {
 
     const todoLists = await todoListsService.getTodoLists()
     return (
-        <div className="flex w-full h-full">
-            <nav className="py-3 px-2 bg-gray-100 max-w-[22vw] min-w-[22vw] h-full rounded-tr-xl rounded-br-xl">
+        <div className="grid grid-cols-1 md:grid-cols-[minmax(220px,300px)_minmax(220px,300px)] gap-x-4 w-full h-full">
+            <nav className="py-3 px-2 bg-gray-100 h-full rounded-tr-xl rounded-br-xl h-full overflow-y-auto">
                 <h3 className="text-xl font-bold mb-2">Todo Lists</h3>
                 <TodoListsList todoLists={todoLists} />
             </nav>
-            <main className="w-full h-full px-4 py-2">
+            <section className="h-full overflow-y-auto">
                 {children}
-            </main>
+            </section>
         </div>
     )
 }

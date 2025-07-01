@@ -2,7 +2,6 @@
 
 import AddButton from "@/components/ui/Buttons/AddButton"
 import BackArrow from "@/components/ui/Icons/BackArrow"
-import Plus from "@/components/ui/Icons/Plus"
 import TaskForm from "@/components/ui/Tasks/TaskForm/TaskForm"
 import TaskList from "@/components/ui/Tasks/TaskList/TaskList"
 import taskService from "@/services/tasks/tasks.service"
@@ -46,14 +45,14 @@ const TaskListWrapper = ({ todo_list_id, title }: TaskListWrapperProps) => {
     }, [])
 
     return (
-        <section>
+        <section className="h-full flex flex-col">
             <div className="flex gap-x-2 mb-2">
                 <button onClick={() => goBack()}>
                     <BackArrow />
                 </button>
                 <h1 className="font-bold text-2xl">{title}</h1>
             </div>
-            <div className="flex flex-col items-start bg-gray-100 rounded-xl max-w-[22vw] min-w-[22vw] px-1.5 py-2">
+            <div className="flex flex-col items-start bg-gray-100 rounded-xl flex-1 overflow-y-scroll px-1.5 py-2">
                 <TaskList
                     tasks={tasks}
                     setTasks={setTasks}
