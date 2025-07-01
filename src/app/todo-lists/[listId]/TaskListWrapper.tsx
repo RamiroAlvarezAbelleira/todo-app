@@ -53,7 +53,7 @@ const TaskListWrapper = ({ todo_list_id, title }: TaskListWrapperProps) => {
                 </button>
                 <h1 className="font-bold text-2xl">{title}</h1>
             </div>
-            <div className="flex flex-col items-start bg-gray-100 rounded-xl max-w-[22vw] min-w-[22vw] px-4 py-2">
+            <div className="flex flex-col items-start bg-gray-100 rounded-xl max-w-[22vw] min-w-[22vw] px-1.5 py-2">
                 <TaskList
                     tasks={tasks}
                     setTasks={setTasks}
