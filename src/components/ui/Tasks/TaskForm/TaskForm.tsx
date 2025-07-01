@@ -23,11 +23,11 @@ const TaskForm = ({ onSubmit, buttonLabel, defaultValue, setShowState }: TaskFor
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmitLocal)} className="flex w-full px-2 items-center justify-between gap-x-2">
-            <div className="flex">
+        <form onSubmit={handleSubmit(onSubmitLocal)} className="flex flex-1 min-w-0 px-2 items-center justify-between gap-x-2">
+            <div className="flex flex-1 min-w-0">
                 <input
                     placeholder="Task..."
-                    className="bg-white border border-gray-300 px-2 rounded"
+                    className="bg-white flex min-w-0 flex-1 border border-gray-300 px-2 rounded"
                     type="text"
                     {...register("title")}
                     defaultValue={defaultValue ?? ""} />

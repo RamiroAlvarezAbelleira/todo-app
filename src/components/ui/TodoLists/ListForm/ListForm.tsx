@@ -22,9 +22,9 @@ const ListForm = ({ onSubmit, buttonLabel, defaultValue, setShowState }: ListFor
     const { register, handleSubmit, resetField } = useForm<TodoListFormData>()
 
     return (
-        <form onSubmit={handleSubmit(onSubmitLocal)} className="flex w-full px-2 items-center justify-between gap-x-2">
+        <form onSubmit={handleSubmit(onSubmitLocal)} className="flex flex-1 min-w-0 px-2 items-center justify-between gap-x-2">
             <input
-                className="bg-white border border-gray-300 px-2 rounded"
+                className="flex flex-1 min-w-0 bg-white border border-gray-300 px-2 rounded"
                 type="text"
                 id="listTitle"
                 placeholder="Title..."
