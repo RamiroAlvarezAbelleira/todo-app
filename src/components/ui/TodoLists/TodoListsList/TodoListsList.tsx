@@ -55,7 +55,10 @@ const TodoListsList = ({ todoLists }: TodoListsListProps) => {
                         )
                     })
                     :
-                    <p>No hay listas</p>
+                    <div className="flex flex-col items-center justify-center w-full rounded bg-white py-2">
+                        <span className="text-m font-semibold">Aun no tenes listas</span>
+                        <span className="text-xs">Agrega tu primera lista</span>
+                    </div>
             }
             <li className="mt-2">
                 {
