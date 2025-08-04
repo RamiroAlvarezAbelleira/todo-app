@@ -12,10 +12,6 @@ const links = [
         title: "Todo lists",
         href: "/todo-lists"
     },
-    {
-        title: "Create",
-        href: "/create-list"
-    }
 ]
 
 const Nav = () => {
