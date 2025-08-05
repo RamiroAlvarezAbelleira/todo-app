@@ -27,7 +27,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 <main className="h-full overflow-hidden">
                     {children}
                 </main>
-                <footer>
+                <footer className="w-full flex justify-center">
                     <h6>Todo App inc.</h6>
                 </footer>
             </body>
