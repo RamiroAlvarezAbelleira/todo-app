@@ -10,9 +10,13 @@ const HomeListCard = async ({ listId, title }: HomeListCardProps) => {
 
     const tasks = await taskService.getTasksByTodoListId(listId)
     return (
-        <Link href={`/todo-lists/${listId}`} className="w-[200px] h-[100px] py-2 px-4 bg-gray-100 rounded hover:bg-gray-200 transition-all duration-200 overflow-hidden">
-            <h3 className="font-semibold">{title}</h3>
-            <ul className="pl-4">
+        <Link href={`/todo-lists/${listId}`} className="w-[200px] h-[100px] bg-gray-100 rounded hover:bg-gray-200 transition-all duration-200 overflow-hidden">
+            <div className="w-full rounded px-2 py-1 bg-gray-300">
+                <h3 className="font-semibold">{title}</h3>
+            </div>
+
+            <div className="overflow-y-auto scroll-container pb-12 h-full">
+                <ul className="pl-4">
                 {
                     tasks?.length > 0 ?
                         tasks.map(task => (
@@ -22,6 +26,9 @@ const HomeListCard = async ({ listId, title }: HomeListCardProps) => {
                         <li>No tasks yet</li>
                 }
             </ul>
+            </div>
+
+            
         </Link>
     )
 }
