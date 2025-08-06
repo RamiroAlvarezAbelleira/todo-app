@@ -22,12 +22,12 @@ const Home = async () => {
             <div className="flex gap-x-2">
                 {
                     todoLists?.map(list => (
-                        <HomeListCard key={list.id} title={list.title} />
+                        <HomeListCard key={list.id} title={list.title} listId={list.id} />
                     ))
 
                 }
                 <div className="flex items-center justify-center w-[200px] h-[100px] py-2 px-4 bg-gray-100 rounded hover:bg-gray-200 transition-all duration-200">
-                    <p>Crear +</p>
+                    <p>Create new list</p>
                 </div>
             </div>
         </section>
