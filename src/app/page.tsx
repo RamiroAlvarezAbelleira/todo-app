@@ -1,10 +1,14 @@
+import HomeListCard from "@/components/ui/TodoLists/HomeListCard/HomeListCard"
+import todoListsService from "@/services/todo-lists/todo-lists.service"
 import Link from "next/link"
 const lists = [
     { title: "Lista" },
     { title: "ejemplo" },
     { title: "otra" },
 ]
-const Home = () => {
+const Home = async () => {
+
+    const todoLists = await todoListsService.getTodoLists()
     return (
         <section className="flex flex-col items-center justify-center w-full h-full">
             <div className="flex flex-col items-center mb-8">
@@ -17,10 +21,8 @@ const Home = () => {
             </div>
             <div className="flex gap-x-2">
                 {
-                    lists.map(list => (
-                        <div className="w-[200px] h-[100px] py-2 px-4 bg-gray-100 rounded hover:bg-gray-200 transition-all duration-200">
-                            <p>{list.title}</p>
-                        </div>
+                    todoLists?.map(list => (
+                        <HomeListCard key={list.id} title={list.title} />
                     ))
 
                 }
