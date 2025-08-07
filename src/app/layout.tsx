@@ -2,6 +2,7 @@ import { Metadata } from "next"
 import React from "react"
 import "./globals.css"
 import Nav from "./nav"
+import { AuthProvider } from "@/context/AuthContext"
 
 export const metadata: Metadata = {
     title: {
@@ -20,16 +21,18 @@ export default function RootLayout({ children }: RootLayoutProps) {
     return (
         <html lang="en">
             <body className="h-screen grid grid-rows-[auto_1fr_auto]">
-                <header className="flex gap-x-2 items-end justify-between px-4 py-0">
-                    <h3 className="text-2xl font-bold text-blue-400">Todo App</h3>
-                    <Nav />
-                </header>
-                <main className="h-full overflow-hidden">
-                    {children}
-                </main>
-                <footer className="w-full flex justify-center">
-                    <h6>Todo App inc.</h6>
-                </footer>
+                <AuthProvider>
+                    <header className="flex gap-x-2 items-end justify-between px-4 py-0">
+                        <h3 className="text-2xl font-bold text-blue-400">Todo App</h3>
+                        <Nav />
+                    </header>
+                    <main className="h-full overflow-hidden">
+                        {children}
+                    </main>
+                    <footer className="w-full flex justify-center">
+                        <h6>Todo App inc.</h6>
+                    </footer>
+                </AuthProvider>
             </body>
         </html>
     )
