@@ -19,7 +19,7 @@ const listDetail = async ({ params }: ListDetailProps) => {
 
   const todoList = await todoListsService.getTodoListById(listId)
   return (
-    <div className="h-full min-w-[220px] max-w-[300px]">
+    <div className="h-full">
       <TaskListWrapper todo_list_id={listId} title={todoList.title} />
     </div>
   )

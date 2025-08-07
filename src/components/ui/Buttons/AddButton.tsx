@@ -8,7 +8,7 @@ type AddButtonProps = {
 const AddButton = ({ setShowState }: AddButtonProps) => {
     return (
         <button
-            className="flex items-center gap-x-1 px-2 mt-2 py-0.5 bg-white rounded hover:bg-gray-100 transition-all duration-200"
+            className="flex items-center gap-x-1 w-full mt-2 px-2 py-0.5 bg-gray-100 rounded hover:bg-white transition-all duration-200"
             onClick={() => setShowState(true)}>
             <span>Add</span>
             <Plus w="18" h="18" />

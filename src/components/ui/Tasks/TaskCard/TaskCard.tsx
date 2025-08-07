@@ -55,14 +55,14 @@ const TaskCard = ({ toggleCompleteTask, updateTaskList, task }: TaskCardProps) =
                     :
                     <div className="flex items-center justify-between min-w-0 flex-1 px-2 py-1 rounded gap-x-2 group hover:bg-white transition-all duration-300">
                         <p className="cursor-pointer capitalize py-0.5 font-semibold truncate flex-1 transition-all duration-300">{task.title}</p>
-                        <div className="hidden group-hover:flex gap-x-2">
+                        <div className="flex gap-x-2">
                             <button onClick={() => setShowUpdate(true)}
-                                className="p-0.5 bg-white rounded hover:bg-gray-100">
+                                className="p-0.5 group-hover:bg-white rounded hover:bg-gray-100 transition-all duration-300">
                                 <Edit />
                             </button>
 
                             <button onClick={() => deleteTask(task.id)}
-                                className="p-0.5 bg-white rounded hover:bg-gray-100">
+                                className="p-0.5 group-hover:bg-white rounded hover:bg-gray-100 transition-all duration-300">
                                 <Delete className="text-red-600" />
                             </button>
                         </div>

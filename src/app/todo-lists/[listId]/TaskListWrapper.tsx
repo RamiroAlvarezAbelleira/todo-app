@@ -45,21 +45,21 @@ const TaskListWrapper = ({ todo_list_id, title }: TaskListWrapperProps) => {
     }, [])
 
     return (
-        <section className="h-full flex flex-col">
-            <div className="flex gap-x-2 mb-2">
+        <section className="flex flex-col items-center">
+            <div className="flex gap-x-2 mb-2 self-start">
                 <button onClick={() => goBack()}>
                     <BackArrow />
                 </button>
                 <h1 className="font-bold text-2xl">{title}</h1>
             </div>
-            <div className="flex flex-col items-start justify-start bg-gray-100 rounded-xl flex-1 overflow-y-auto scroll-container px-1.5 py-2">
+            <div className="flex mt-8 w-[50%] flex-col items-start justify-start bg-gray-100 rounded-xl flex-1 overflow-y-auto scroll-container p-4">
                 <TaskList
                     tasks={tasks}
                     setTasks={setTasks}
                 />
                 {
                     showCreate ?
-                        <div className="py-2">
+                        <div className="w-full py-2">
                             <TaskForm
                                 onSubmit={createTaskFunc}
                                 buttonLabel="Add"
@@ -67,7 +67,9 @@ const TaskListWrapper = ({ todo_list_id, title }: TaskListWrapperProps) => {
                             />
                         </div>
                         :
-                        <AddButton setShowState={setShowCreate} />
+                        <div className="w-full flex justify-center">
+                            <AddButton setShowState={setShowCreate} />
+                        </div>
                 }
             </div>
         </section>
