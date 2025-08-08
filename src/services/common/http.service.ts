@@ -35,6 +35,24 @@ class HttpBaseApi {
         return res.json()
     }
 
+    async httpPostPrivate<T>(endpointSuffix: string, body: object, token: string): Promise<T> {
+        const res = await fetch(`${BASE_API_URL}${endpointSuffix}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify(body)
+        })
+
+        if (!res.ok) {
+            console.log(`${res.status}: ${res?.statusText}`)
+            throw new Error(`Failed to Post: ${endpointSuffix}`);
+        }
+
+        return res.json()
+    }
+
     async httpPut<T>(endpointSuffix: string, body?: object): Promise<T> {
         const res = await fetch(`${BASE_API_URL}${endpointSuffix}`, {
             method: "PUT",

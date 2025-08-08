@@ -7,12 +7,14 @@ import ListForm from "../ListForm/ListForm"
 import Plus from "../../Icons/Plus"
 import ListCard from "../ListCard/ListCard"
 import AddButton from "../../Buttons/AddButton"
+import { useAuth } from "@/context/AuthContext"
 
 type TodoListsListProps = {
     todoLists?: TodoList[]
 }
 const TodoListsList = ({ todoLists }: TodoListsListProps) => {
 
+    const { user } = useAuth()
     const [localLists, setLocalLists] = useState<TodoList[]>(todoLists ?? [])
     const [showCreate, setShowCreate] = useState(false)
 
@@ -35,10 +37,15 @@ const TodoListsList = ({ todoLists }: TodoListsListProps) => {
     }
 
     const addNewTodoList = async (data: TodoListFormData) => {
-        const res = await todoListsService.createList(data)
-        const newLists = [...localLists, res]
-        setLocalLists(newLists)
-        setShowCreate(false)
+
+        if (user) {
+            const token = await user.getIdToken()
+            const res = await todoListsService.createList({...data, user_uid: ""}, token)
+            const newLists = [...localLists, res]
+            setLocalLists(newLists)
+            setShowCreate(false)
+        }
+
     }
 
     return (

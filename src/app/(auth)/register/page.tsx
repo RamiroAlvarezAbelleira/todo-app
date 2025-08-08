@@ -17,9 +17,8 @@ const Register = () => {
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password)
             const user = userCredential.user
-
-            const token = await user.getIdToken();
-            const res = await userService.createUser({ uid: token, email: data.email, username: data.username })
+            
+            const res = await userService.createUser({ uid: user.uid, email: data.email, username: data.username })
 
             console.log("Response", res)
         } catch (error: any) {

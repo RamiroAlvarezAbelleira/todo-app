@@ -11,8 +11,8 @@ class TodoListsService {
         return httpBaseApi.httpGet(`/todo-lists/${id}`)
     }
 
-    createList = async (data: object): Promise<TodoList> => {
-        return httpBaseApi.httpPost("/todo-lists", data)
+    createList = async (data: object, token: string): Promise<TodoList> => {
+        return httpBaseApi.httpPostPrivate("/todo-lists", data, token)
     }
 
     updateList = async (id: string, data: object): Promise<TodoList> => {

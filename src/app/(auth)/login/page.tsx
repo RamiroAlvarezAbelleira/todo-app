@@ -13,7 +13,7 @@ const Login = () => {
     const onSubmit = async (data: LoginForm) => {
         try {
             const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password)
-            console.log("logged in: ", userCredential.user)
+            console.log("logged in: ", userCredential.user.uid)
         } catch (error: any) {
             console.error(error.message)
         }
