@@ -3,8 +3,8 @@ import httpBaseApi from "../common/http.service"
 
 class TodoListsService {
 
-    getTodoLists = async (): Promise<TodoList[]> => {
-        return httpBaseApi.httpGet('/todo-lists')
+    getTodoLists = async (token: string): Promise<TodoList[]> => {
+        return httpBaseApi.httpGetPrivate('/todo-lists', token)
     }
 
     getTodoListById = async (id: string): Promise<TodoList> => {

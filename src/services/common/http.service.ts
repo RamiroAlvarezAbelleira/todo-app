@@ -18,6 +18,23 @@ class HttpBaseApi {
         return res.json()
     }
 
+    async httpGetPrivate<T>(endpointSuffix: string, token: string): Promise<T> {
+        const res = await fetch(`${BASE_API_URL}${endpointSuffix}`, {
+            cache: "no-cache",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
+        })
+
+        if (!res.ok) {
+            console.log(`${res.status}: ${res?.statusText}`)
+            throw new Error(`Failed to retrieve: ${endpointSuffix}`);
+        }
+
+        return res.json()
+    }
+
     async httpPost<T>(endpointSuffix: string, body: object): Promise<T> {
         const res = await fetch(`${BASE_API_URL}${endpointSuffix}`, {
             method: "POST",

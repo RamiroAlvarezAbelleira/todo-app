@@ -4,7 +4,8 @@ import { onAuthStateChanged, signOut, User } from 'firebase/auth'
 import { createContext, useContext, useEffect, useState } from 'react'
 
 type AuthContextType = {
-    user: User | null
+    user: User | null,
+    token: string | null
     loading: boolean,
     logout: () => Promise<void>
 }
@@ -12,17 +13,26 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType>({
     user: null,
     loading: true,
+    token: null,
     logout: async () => { }
 })
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUser] = useState<User | null>(null)
+    const [token, setToken] = useState<string | null>(null)
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
-            setUser(firebaseUser),
-                setLoading(false)
+        const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+            setUser(firebaseUser)
+
+            if (firebaseUser) {
+                let newToken = await firebaseUser.getIdToken()
+                setToken(newToken)
+            } else {
+                setToken(null)
+            }
+            setLoading(false)
         })
 
         return () => unsubscribe()
@@ -34,7 +44,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
 
     return (
-        <AuthContext.Provider value={{ user, loading, logout }}>
+        <AuthContext.Provider value={{ user, token, loading, logout }}>
             {children}
         </AuthContext.Provider>
     )

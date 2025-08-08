@@ -1,26 +1,36 @@
 "use client"
 
 import { TodoList, TodoListFormData } from "@/types/todo-list.types"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import todoListsService from "@/services/todo-lists/todo-lists.service"
 import ListForm from "../ListForm/ListForm"
-import Plus from "../../Icons/Plus"
 import ListCard from "../ListCard/ListCard"
 import AddButton from "../../Buttons/AddButton"
 import { useAuth } from "@/context/AuthContext"
 
-type TodoListsListProps = {
-    todoLists?: TodoList[]
-}
-const TodoListsList = ({ todoLists }: TodoListsListProps) => {
+const TodoListsList = () => {
 
-    const { user } = useAuth()
-    const [localLists, setLocalLists] = useState<TodoList[]>(todoLists ?? [])
+    const { token } = useAuth()
+    const [todoLists, setTodoLists] = useState<TodoList[]>([])
     const [showCreate, setShowCreate] = useState(false)
+
+    const getTodoLists = async () => {
+        if (token) {
+            const usersLists = await todoListsService.getTodoLists(token)
+            return usersLists
+        } else {
+            return []
+        }
+
+    }
+
+    useEffect(() => {
+        getTodoLists().then(lists => setTodoLists(lists))
+    }, [])
 
     const updateListsState = (listId: string, newList?: TodoList) => {
         newList ?
-            setLocalLists(prevLocalLists => {
+            setTodoLists(prevLocalLists => {
                 return prevLocalLists.map(list => {
                     if (list.id === listId) {
                         return newList
@@ -30,29 +40,26 @@ const TodoListsList = ({ todoLists }: TodoListsListProps) => {
                 })
             })
             :
-            setLocalLists(prevLocalLists => {
+            setTodoLists(prevLocalLists => {
                 return prevLocalLists.filter(list => list.id !== listId)
             })
 
     }
 
     const addNewTodoList = async (data: TodoListFormData) => {
-
-        if (user) {
-            const token = await user.getIdToken()
-            const res = await todoListsService.createList({...data, user_uid: ""}, token)
-            const newLists = [...localLists, res]
-            setLocalLists(newLists)
+        if (token) {
+            const res = await todoListsService.createList({ ...data }, token)
+            const newLists = [...todoLists, res]
+            setTodoLists(newLists)
             setShowCreate(false)
         }
-
     }
 
     return (
         <ul className="">
             {
-                localLists.length > 0 ?
-                    localLists.map(list => {
+                todoLists.length > 0 ?
+                    todoLists.map(list => {
                         return (
                             <ListCard
                                 key={`${list.title}-${list.id}`}
