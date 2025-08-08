@@ -3,9 +3,11 @@
 import { useForm } from "react-hook-form"
 import { createUserWithEmailAndPassword } from "firebase/auth"
 import { auth } from "@/lib/firebaseClient"
+import userService from "@/services/users/users.service"
 
 type RegisterForm = {
     email: string,
+    username: string,
     password: string
 }
 const Register = () => {
@@ -14,8 +16,12 @@ const Register = () => {
     const onSubmit = async (data: RegisterForm) => {
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password)
-            console.log("registered user: ", userCredential.user)
+            const user = userCredential.user
 
+            const token = await user.getIdToken();
+            const res = await userService.createUser({ uid: token, email: data.email, username: data.username })
+
+            console.log("Response", res)
         } catch (error: any) {
             console.error(error.message)
         }
@@ -26,6 +32,7 @@ const Register = () => {
             <h1>Register</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <input type="email" placeholder='Email' {...register("email")} />
+                <input type="text" placeholder="Username" {...register("username")} />
                 <input type="password" placeholder='password' {...register("password")} />
                 <button type="submit">Register</button>
             </form>
