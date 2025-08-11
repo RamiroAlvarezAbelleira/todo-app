@@ -29,8 +29,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             if (firebaseUser) {
                 let newToken = await firebaseUser.getIdToken()
                 setToken(newToken)
+                await fetch("/api/set-token", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ token: newToken })
+                })
             } else {
                 setToken(null)
+                await fetch("/api/logout", { method: "POST" })
             }
             setLoading(false)
         })

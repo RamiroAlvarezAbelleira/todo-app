@@ -87,9 +87,44 @@ class HttpBaseApi {
         return res.json()
     }
 
+    async httpPutPrivate<T>(endpointSuffix: string, token: string, body?: object): Promise<T> {
+        const res = await fetch(`${BASE_API_URL}${endpointSuffix}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify(body ?? {})
+        })
+
+        if (!res.ok) {
+            console.log(`${res.status}: ${res?.statusText}`)
+            throw new Error(`Failed to Put: ${endpointSuffix}`);
+        }
+
+        return res.json()
+    }
+
     async httpDelete<T>(endpointSuffix: string): Promise<T> {
         const res = await fetch(`${BASE_API_URL}${endpointSuffix}`, {
             method: "DELETE"
+        })
+
+        if (!res.ok) {
+            console.log(`${res.status}: ${res?.statusText}`)
+            throw new Error(`Failed to Delete: ${endpointSuffix}`);
+        }
+
+        return res.json()
+    }
+
+    async httpDeletePrivate<T>(endpointSuffix: string, token: string): Promise<T> {
+        const res = await fetch(`${BASE_API_URL}${endpointSuffix}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
         })
 
         if (!res.ok) {

@@ -7,20 +7,20 @@ class TodoListsService {
         return httpBaseApi.httpGetPrivate('/todo-lists', token)
     }
 
-    getTodoListById = async (id: string): Promise<TodoList> => {
-        return httpBaseApi.httpGet(`/todo-lists/${id}`)
+    getTodoListById = async (id: string, token:string): Promise<TodoList> => {
+        return httpBaseApi.httpGetPrivate(`/todo-lists/${id}`, token)
     }
 
     createList = async (data: object, token: string): Promise<TodoList> => {
         return httpBaseApi.httpPostPrivate("/todo-lists", data, token)
     }
 
-    updateList = async (id: string, data: object): Promise<TodoList> => {
-        return httpBaseApi.httpPut(`/todo-lists/${id}`, data)
+    updateList = async (id: string, token: string, data: object): Promise<TodoList> => {
+        return httpBaseApi.httpPutPrivate(`/todo-lists/${id}`, token, data)
     }
 
-    deleteList = async (id: string): Promise<object> => {
-        return httpBaseApi.httpDelete(`/todo-lists/${id}`)
+    deleteList = async (id: string, token: string): Promise<object> => {
+        return httpBaseApi.httpDeletePrivate(`/todo-lists/${id}`, token)
     }
 
 }

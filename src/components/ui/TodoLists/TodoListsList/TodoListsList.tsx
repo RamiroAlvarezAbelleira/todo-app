@@ -6,15 +6,13 @@ import todoListsService from "@/services/todo-lists/todo-lists.service"
 import ListForm from "../ListForm/ListForm"
 import ListCard from "../ListCard/ListCard"
 import AddButton from "../../Buttons/AddButton"
-import { useAuth } from "@/context/AuthContext"
 
-const TodoListsList = () => {
-
-    const { token } = useAuth()
+const TodoListsList = ({ token }: { token: string }) => {
     const [todoLists, setTodoLists] = useState<TodoList[]>([])
     const [showCreate, setShowCreate] = useState(false)
 
     const getTodoLists = async () => {
+        console.log(token)
         if (token) {
             const usersLists = await todoListsService.getTodoLists(token)
             return usersLists
@@ -65,6 +63,7 @@ const TodoListsList = () => {
                                 key={`${list.title}-${list.id}`}
                                 list={list}
                                 updateListState={updateListsState}
+                                token={token}
                             />
                         )
                     })

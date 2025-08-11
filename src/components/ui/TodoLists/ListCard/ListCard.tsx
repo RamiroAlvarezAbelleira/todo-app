@@ -10,22 +10,23 @@ import Edit from "../../Icons/Edit"
 
 type ListCardProps = {
     list: TodoList
-    updateListState: (listId: string, newList?: TodoList) => void
+    updateListState: (listId: string, newList?: TodoList) => void,
+    token: string
 }
 
-const ListCard = ({ list, updateListState }: ListCardProps) => {
+const ListCard = ({ list, updateListState, token }: ListCardProps) => {
 
     const [showUpdate, setShowUpdate] = useState(false)
 
     const updateTodoList = async (data: TodoListFormData) => {
-        const res = await todoListsService.updateList(list.id, data)
+        const res = await todoListsService.updateList(list.id, token, data)
         setShowUpdate(false)
         updateListState(list.id, res)
     }
 
 
     const deleteTodoList = async (listId: string) => {
-        await todoListsService.deleteList(listId)
+        await todoListsService.deleteList(listId, token)
         updateListState(listId)
     }
 

@@ -4,6 +4,7 @@ import AddButton from "@/components/ui/Buttons/AddButton"
 import BackArrow from "@/components/ui/Icons/BackArrow"
 import TaskForm from "@/components/ui/Tasks/TaskForm/TaskForm"
 import TaskList from "@/components/ui/Tasks/TaskList/TaskList"
+import { useAuth } from "@/context/AuthContext"
 import taskService from "@/services/tasks/tasks.service"
 import { Task, TaskFormData } from "@/types/task.types"
 import { useRouter } from "next/navigation"
@@ -11,19 +12,23 @@ import { useEffect, useState } from "react"
 
 type TaskListWrapperProps = {
     todo_list_id: string,
-    title: string
+    title: string,
+    token: string
 }
 
-const TaskListWrapper = ({ todo_list_id, title }: TaskListWrapperProps) => {
-
+const TaskListWrapper = ({ todo_list_id, title, token }: TaskListWrapperProps) => {
     const router = useRouter()
 
     const [tasks, setTasks] = useState<Task[]>([])
     const [showCreate, setShowCreate] = useState(false)
 
     const getTaskFunc = async () => {
-        const res = await taskService.getTasksByTodoListId(todo_list_id)
-        setTasks(res)
+        if (token) {
+            const res = await taskService.getTasksByTodoListId(todo_list_id)
+            setTasks(res)
+        } else {
+            setTasks([])
+        }
     }
 
     const goBack = () => {
