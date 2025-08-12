@@ -11,23 +11,24 @@ import Edit from "../../Icons/Edit"
 type TaskCardProps = {
     task: Task
     toggleCompleteTask: (newTask: Task) => void,
-    updateTaskList: (taskId: string, newTask?: Task) => void
+    updateTaskList: (taskId: string, newTask?: Task) => void,
+    token: string
 }
 
-const TaskCard = ({ toggleCompleteTask, updateTaskList, task }: TaskCardProps) => {
+const TaskCard = ({ toggleCompleteTask, updateTaskList, task, token }: TaskCardProps) => {
     const [showUpdate, setShowUpdate] = useState(false)
 
     const completeStyle = "bg-green-500 border-gray-200 group hover:border-white hover:bg-green-400"
     const incompleteStyle = "bg-transparent border-gray-200 hover:border-gray-300"
 
     const updateTask = async (data: TaskFormData) => {
-        const res = await taskService.updateTask(task.id, data)
+        const res = await taskService.updateTask(task.id, data, token)
         setShowUpdate(false)
         updateTaskList(task.id, res)
     }
 
     const deleteTask = async (taskId: string) => {
-        await taskService.deleteTask(taskId)
+        await taskService.deleteTask(taskId, token)
         setShowUpdate(false)
         updateTaskList(taskId)
     }

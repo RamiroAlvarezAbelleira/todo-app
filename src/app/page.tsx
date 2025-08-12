@@ -31,7 +31,7 @@ const Home = async () => {
                     <div className="flex gap-x-2">
                         {
                             todoLists?.slice(0, 4).map(list => (
-                                <HomeListCard key={list.id} title={list.title} listId={list.id} />
+                                <HomeListCard key={list.id} title={list.title} listId={list.id} token={token} />
                             ))
 
                         }

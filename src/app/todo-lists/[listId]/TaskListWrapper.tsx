@@ -24,7 +24,7 @@ const TaskListWrapper = ({ todo_list_id, title, token }: TaskListWrapperProps) =
 
     const getTaskFunc = async () => {
         if (token) {
-            const res = await taskService.getTasksByTodoListId(todo_list_id)
+            const res = await taskService.getTasksByTodoListId(todo_list_id, token)
             setTasks(res)
         } else {
             setTasks([])
@@ -40,7 +40,7 @@ const TaskListWrapper = ({ todo_list_id, title, token }: TaskListWrapperProps) =
             description: data.description,
             todo_list_id: todo_list_id
         }
-        const res = await taskService.createTask(newTask)
+        const res = await taskService.createTask(newTask, token)
         let newTaskArr = [...tasks, res]
         setTasks(newTaskArr)
     }
@@ -61,6 +61,7 @@ const TaskListWrapper = ({ todo_list_id, title, token }: TaskListWrapperProps) =
                 <TaskList
                     tasks={tasks}
                     setTasks={setTasks}
+                    token={token}
                 />
                 {
                     showCreate ?

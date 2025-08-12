@@ -3,12 +3,13 @@ import Link from "next/link"
 
 type HomeListCardProps = {
     listId: string,
-    title: string
+    title: string,
+    token: string
 }
 
-const HomeListCard = async ({ listId, title }: HomeListCardProps) => {
+const HomeListCard = async ({ listId, title, token }: HomeListCardProps) => {
 
-    const tasks = await taskService.getTasksByTodoListId(listId)
+    const tasks = await taskService.getTasksByTodoListId(listId, token)
     return (
         <Link href={`/todo-lists/${listId}`} className="w-[200px] h-[100px] bg-gray-100 rounded hover:bg-gray-200 transition-all duration-200 overflow-hidden">
             <div className="w-full rounded px-2 py-1 bg-gray-300">

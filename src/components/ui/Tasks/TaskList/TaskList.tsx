@@ -5,9 +5,10 @@ import TaskCard from "../TaskCard/TaskCard"
 
 type TaskListProps = {
     tasks: Task[],
-    setTasks: Dispatch<SetStateAction<Task[]>>
+    setTasks: Dispatch<SetStateAction<Task[]>>,
+    token: string
 }
-const TaskList = ({ tasks, setTasks }: TaskListProps) => {
+const TaskList = ({ tasks, setTasks, token }: TaskListProps) => {
 
     const updateTaskList = (taskId: string, newTask?: Task) => {
         newTask ?
@@ -27,7 +28,7 @@ const TaskList = ({ tasks, setTasks }: TaskListProps) => {
     }
 
     const toggleCompleteTask = async (newTask: Task) => {
-        const res = await taskService.toggleCompleteTask(newTask.id)
+        const res = await taskService.toggleCompleteTask(newTask.id, token)
         updateTaskList(newTask.id, res)
     }
 
@@ -42,6 +43,7 @@ const TaskList = ({ tasks, setTasks }: TaskListProps) => {
                             toggleCompleteTask={toggleCompleteTask}
                             task={task}
                             updateTaskList={updateTaskList}
+                            token={token}
                         />
                     )
                 })

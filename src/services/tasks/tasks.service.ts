@@ -2,20 +2,20 @@ import { Task } from "@/types/task.types";
 import httpBaseApi from "../common/http.service";
 
 class TasksService {
-    createTask = async (data: object): Promise<Task> => {
-        return httpBaseApi.httpPost("/tasks", data)
+    createTask = async (data: object, token: string): Promise<Task> => {
+        return httpBaseApi.httpPostPrivate("/tasks", data, token)
     }
-    getTasksByTodoListId = async (listId: string): Promise<Task[]> => {
-        return httpBaseApi.httpGet(`/tasks/${listId}`)
+    getTasksByTodoListId = async (listId: string, token: string): Promise<Task[]> => {
+        return httpBaseApi.httpGetPrivate(`/tasks/${listId}`, token)
     }
-    toggleCompleteTask = async (taskId: string): Promise<Task> => {
-        return httpBaseApi.httpPut(`/tasks/toggle_complete/${taskId}`)
+    toggleCompleteTask = async (taskId: string, token: string): Promise<Task> => {
+        return httpBaseApi.httpPutPrivate(`/tasks/toggle_complete/${taskId}`, token)
     }
-    updateTask = async (taskId: string, data: object): Promise<Task> => {
-        return httpBaseApi.httpPut(`/tasks/${taskId}`, data)
+    updateTask = async (taskId: string, data: object, token: string): Promise<Task> => {
+        return httpBaseApi.httpPutPrivate(`/tasks/${taskId}`, token, data)
     }
-    deleteTask = async (taskId: string): Promise<object> => {
-        return httpBaseApi.httpDelete(`/tasks/${taskId}`)
+    deleteTask = async (taskId: string, token: string): Promise<object> => {
+        return httpBaseApi.httpDeletePrivate(`/tasks/${taskId}`, token)
     }
 }
 
