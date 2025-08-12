@@ -7,6 +7,7 @@ import todoListsService from "@/services/todo-lists/todo-lists.service"
 import ListForm from "../ListForm/ListForm"
 import Delete from "../../Icons/Delete"
 import Edit from "../../Icons/Edit"
+import { redirect, usePathname } from "next/navigation"
 
 type ListCardProps = {
     list: TodoList
@@ -15,7 +16,7 @@ type ListCardProps = {
 }
 
 const ListCard = ({ list, updateListState, token }: ListCardProps) => {
-
+    const pathname = usePathname()
     const [showUpdate, setShowUpdate] = useState(false)
 
     const updateTodoList = async (data: TodoListFormData) => {
@@ -28,6 +29,9 @@ const ListCard = ({ list, updateListState, token }: ListCardProps) => {
     const deleteTodoList = async (listId: string) => {
         await todoListsService.deleteList(listId, token)
         updateListState(listId)
+        if (pathname.includes(listId)) {
+            redirect("/todo-lists")
+        }
     }
 
     return (
