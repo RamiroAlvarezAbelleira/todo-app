@@ -1,9 +1,18 @@
 import HomeListCard from "@/components/ui/TodoLists/HomeListCard/HomeListCard"
 import todoListsService from "@/services/todo-lists/todo-lists.service"
+import { TodoList } from "@/types/todo-list.types"
+import { cookies } from "next/headers"
 import Link from "next/link"
 const Home = async () => {
+    const cookieStore = await cookies()
 
-    const todoLists = await todoListsService.getTodoLists()
+    const token = cookieStore.get("auth_token")?.value ?? ""
+    let todoLists: TodoList[] = []
+    
+    if (token) {
+        todoLists = await todoListsService.getTodoLists(token)
+    }
+
     return (
         <section className="flex flex-col items-center justify-center w-full h-full">
             <div className="flex flex-col w-[40vw] items-start">

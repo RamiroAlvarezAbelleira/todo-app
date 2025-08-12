@@ -1,6 +1,7 @@
 "use client"
 import { auth } from '@/lib/firebaseClient'
 import { onAuthStateChanged, signOut, User } from 'firebase/auth'
+import { redirect } from 'next/navigation'
 import { createContext, useContext, useEffect, useState } from 'react'
 
 type AuthContextType = {
@@ -36,11 +37,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                     },
                     body: JSON.stringify({ token: newToken })
                 })
+                setLoading(false)
+                redirect("/")
             } else {
                 setToken(null)
                 await fetch("/api/logout", { method: "POST" })
+                setLoading(false)
+                redirect("/login")
             }
-            setLoading(false)
         })
 
         return () => unsubscribe()

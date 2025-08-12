@@ -6,20 +6,19 @@ import todoListsService from "@/services/todo-lists/todo-lists.service"
 import ListForm from "../ListForm/ListForm"
 import ListCard from "../ListCard/ListCard"
 import AddButton from "../../Buttons/AddButton"
+import { redirect } from "next/navigation"
 
 const TodoListsList = ({ token }: { token: string }) => {
     const [todoLists, setTodoLists] = useState<TodoList[]>([])
     const [showCreate, setShowCreate] = useState(false)
 
     const getTodoLists = async () => {
-        console.log(token)
-        if (token) {
+        if (token.length > 0) {
             const usersLists = await todoListsService.getTodoLists(token)
             return usersLists
         } else {
-            return []
+            redirect("/login")
         }
-
     }
 
     useEffect(() => {
