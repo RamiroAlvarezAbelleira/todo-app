@@ -6,9 +6,9 @@ type AuthLayoutType = {
 
 const AuthLayout = ({ children }: AuthLayoutType) => {
     return (
-        <div>
+        <section className="flex h-full justify-center items-center">
             {children}
-        </div>
+        </section>
     )
 }
 
