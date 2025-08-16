@@ -49,8 +49,8 @@ const TaskList = ({ tasks, setTasks, token }: TaskListProps) => {
                 })
                 :
                 <div className="flex flex-col items-center justify-center w-full rounded bg-white py-2">
-                    <span className="text-m font-semibold">Aun no tenes Tareas</span>
-                    <span className="text-xs">Agrega tu primer tarea</span>
+                    <span className="text-m font-semibold">You dont have tasks yet</span>
+                    <span className="text-xs">Add your first task</span>
                 </div>
             }
         </ul>
