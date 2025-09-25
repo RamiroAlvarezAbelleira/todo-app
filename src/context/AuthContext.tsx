@@ -11,7 +11,7 @@ type AuthContextType = {
     logout: () => Promise<void>
 }
 
-const AuthContext = createContext<AuthContextType>({
+export const AuthContext = createContext<AuthContextType>({
     user: null,
     loading: true,
     token: null,
@@ -28,6 +28,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             setUser(firebaseUser)
 
             if (firebaseUser) {
+                console.log("entro")
                 let newToken = await firebaseUser.getIdToken()
                 setToken(newToken)
                 await fetch("/api/set-token", {
@@ -40,6 +41,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 setLoading(false)
                 redirect("/")
             } else {
+                console.log(" no entro")
                 setToken(null)
                 await fetch("/api/logout", { method: "POST" })
                 setLoading(false)
@@ -61,10 +63,4 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         </AuthContext.Provider>
     )
 
-}
-
-export const useAuth = () => {
-    const context = useContext(AuthContext)
-    if (!context) throw new Error('useAuth must be used within an AuthProvider')
-    return context
 }

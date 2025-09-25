@@ -1,6 +1,6 @@
 "use client"
 
-import { useAuth } from "@/context/AuthContext"
+import { useAuth } from "@/hooks/useAuth"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
