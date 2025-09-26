@@ -1,7 +1,11 @@
 "use client"
 import { auth } from '@/lib/firebaseClient'
+import { loginScheme } from '@/schemes/login.scheme'
 import { signInWithEmailAndPassword } from '@firebase/auth'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { Span } from 'next/dist/trace'
 import Link from 'next/link'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 type LoginForm = {
@@ -9,13 +13,19 @@ type LoginForm = {
     password: string
 }
 const Login = () => {
-    const { register, handleSubmit } = useForm<LoginForm>()
+    const [loading, setLoading] = useState(false)
+    const { register, handleSubmit, formState: { errors } } = useForm<LoginForm>({
+        resolver: yupResolver(loginScheme)
+    })
 
     const onSubmit = async (data: LoginForm) => {
+        setLoading(true)
         try {
             const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password)
             console.log("logged in: ", userCredential.user.uid)
+            setLoading(false)
         } catch (error: any) {
+            setLoading(false)
             console.error(error.message)
         }
     }
@@ -27,9 +37,15 @@ const Login = () => {
                 Welcome back! Let’s get your tasks done.
             </p>
             <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-y-6'>
-                <input className='bg-white px-2 rounded border border-gray-200' type="email" placeholder='Email' {...register("email")} />
-                <input className='bg-white px-2 rounded border border-gray-200' type="password" placeholder='Password' {...register("password")} />
-                <button type="submit" className='text-white bg-blue-400 rounded py-1'>Sign in</button>
+                <div className='w-full relative flex flex-col'>
+                    <input className={`bg-white px-2 rounded border border-gray-200 ${errors.email && "border-red-500"}`} type="email" placeholder='Email' {...register("email")} />
+                    {errors.email && <span className='text-red-500 my-0 text-sm absolute bottom-[-22px] pl-1'>{errors.email.message}</span>}
+                </div>
+                <div className='w-full relative flex flex-col'>
+                    <input className={`bg-white px-2 rounded border border-gray-200 ${errors.password && "border-red-500"}`} type="password" placeholder='Password' {...register("password")} />
+                    {errors.password && <span className='text-red-500 my-0 text-sm absolute bottom-[-22px] pl-1'>{errors.password.message}</span>}
+                </div>
+                <button type="submit" className='text-white bg-blue-400 rounded py-1' disabled={loading}>{loading ? "Loading..." : "Sign in"}</button>
             </form>
             <p className='text-sm text-gray-500 mt-2'>
                 Don't have an account?{" "}
