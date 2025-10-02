@@ -14,19 +14,40 @@ type LoginForm = {
 }
 const Login = () => {
     const [loading, setLoading] = useState(false)
+    const [authError, setAuthError] = useState<string | null>(null)
     const { register, handleSubmit, formState: { errors } } = useForm<LoginForm>({
         resolver: yupResolver(loginScheme)
     })
 
     const onSubmit = async (data: LoginForm) => {
         setLoading(true)
+        setAuthError(null)
         try {
             const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password)
             console.log("logged in: ", userCredential.user.uid)
-            setLoading(false)
         } catch (error: any) {
+            console.error(error.code, error.message)
+
+            switch (error.code) {
+                case "auth/invalid-credential":
+                    setAuthError("Invalid credentials.")
+                    break
+                case "auth/wrong-password":
+                    setAuthError("Incorrect password.")
+                    break
+                case "auth/too-many-requests":
+                    setAuthError("Too many failed attempts. Please try again later.")
+                    break
+                case "auth/user-disabled":
+                    setAuthError("This account has been disabled.")
+                    break
+                default:
+                    setAuthError("An error occurred while signing in.")
+                    break
+            }
+
+        } finally {
             setLoading(false)
-            console.error(error.message)
         }
     }
 
@@ -38,13 +59,14 @@ const Login = () => {
             </p>
             <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-y-6'>
                 <div className='w-full relative flex flex-col'>
-                    <input className={`bg-white px-2 rounded border border-gray-200 ${errors.email && "border-red-500"}`} type="email" placeholder='Email' {...register("email")} />
+                    <input className={`bg-white px-2 rounded border border-gray-200 ${(errors.email || authError) && "border-red-500"}`} type="email" placeholder='Email' {...register("email")} />
                     {errors.email && <span className='text-red-500 my-0 text-sm absolute bottom-[-22px] pl-1'>{errors.email.message}</span>}
                 </div>
                 <div className='w-full relative flex flex-col'>
-                    <input className={`bg-white px-2 rounded border border-gray-200 ${errors.password && "border-red-500"}`} type="password" placeholder='Password' {...register("password")} />
+                    <input className={`bg-white px-2 rounded border border-gray-200 ${(errors.password || authError) && "border-red-500"}`} type="password" placeholder='Password' {...register("password")} />
                     {errors.password && <span className='text-red-500 my-0 text-sm absolute bottom-[-22px] pl-1'>{errors.password.message}</span>}
                 </div>
+                {authError && <p className='text-red-500 text-sm text-center'>{authError}</p>}
                 <button type="submit" className='text-white bg-blue-400 rounded py-1' disabled={loading}>{loading ? "Loading..." : "Sign in"}</button>
             </form>
             <p className='text-sm text-gray-500 mt-2'>
