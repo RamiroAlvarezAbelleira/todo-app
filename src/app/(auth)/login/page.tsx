@@ -59,11 +59,11 @@ const Login = () => {
             </p>
             <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-y-6'>
                 <div className='w-full relative flex flex-col'>
-                    <input className={`bg-white px-2 rounded border border-gray-200 ${(errors.email || authError) && "border-red-500"}`} type="email" placeholder='Email' {...register("email")} />
+                    <input className={`bg-white px-2 rounded border border-gray-200 ${(errors.email || authError) && "border-red-500 focus:outline-red-500"}`} type="email" placeholder='Email' {...register("email")} />
                     {errors.email && <span className='text-red-500 my-0 text-sm absolute bottom-[-22px] pl-1'>{errors.email.message}</span>}
                 </div>
                 <div className='w-full relative flex flex-col'>
-                    <input className={`bg-white px-2 rounded border border-gray-200 ${(errors.password || authError) && "border-red-500"}`} type="password" placeholder='Password' {...register("password")} />
+                    <input className={`bg-white px-2 rounded border border-gray-200 ${(errors.password || authError) && "border-red-500 focus:outline-red-500"}`} type="password" placeholder='Password' {...register("password")} />
                     {errors.password && <span className='text-red-500 my-0 text-sm absolute bottom-[-22px] pl-1'>{errors.password.message}</span>}
                 </div>
                 {authError && <p className='text-red-500 text-sm text-center'>{authError}</p>}
