@@ -35,7 +35,8 @@ const Register = () => {
             console.error(error.code, error.message)
 
             switch (error.code) {
-                case "":
+                case "auth/email-already-in-use":
+                    setAuthError("Email already in use.")
                     break
                 default:
                     setAuthError("An error occurred while signing up.")
