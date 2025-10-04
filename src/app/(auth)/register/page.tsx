@@ -12,7 +12,8 @@ import { registerScheme } from "@/schemes/register.scheme"
 type RegisterForm = {
     email: string,
     username: string,
-    password: string
+    password: string,
+    confirmPassword: string
 }
 const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<RegisterForm>({
@@ -72,6 +73,13 @@ const Register = () => {
                         placeholder='Password'
                         {...register("password")} />
                     {errors.password && <span className='text-red-500 my-0 text-sm absolute bottom-[-22px] pl-1'>{errors.password.message}</span>}
+                </div>
+                <div className='w-full relative flex flex-col'>
+                    <input className={`bg-white px-2 rounded border border-gray-200 ${(errors.confirmPassword || authError) && "border-red-500 focus:outline-red-500"}`}
+                        type="password"
+                        placeholder='Confirm your password'
+                        {...register("confirmPassword")} />
+                    {errors.confirmPassword && <span className='text-red-500 my-0 text-sm absolute bottom-[-22px] pl-1'>{errors.confirmPassword.message}</span>}
                 </div>
                 {authError && <p className='text-red-500 text-sm text-center'>{authError}</p>}
                 <button type="submit" className='text-white bg-blue-400 rounded py-1' disabled={loading}>{loading ? "Loading..." : "Register"}</button>
