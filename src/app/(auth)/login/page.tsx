@@ -3,7 +3,6 @@ import { auth } from '@/lib/firebaseClient'
 import { loginScheme } from '@/schemes/login.scheme'
 import { signInWithEmailAndPassword } from '@firebase/auth'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Span } from 'next/dist/trace'
 import Link from 'next/link'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -26,8 +25,6 @@ const Login = () => {
             const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password)
             console.log("logged in: ", userCredential.user.uid)
         } catch (error: any) {
-            console.error(error.code, error.message)
-
             switch (error.code) {
                 case "auth/invalid-credential":
                     setAuthError("Invalid credentials.")

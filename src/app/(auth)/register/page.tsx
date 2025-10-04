@@ -32,8 +32,6 @@ const Register = () => {
 
             console.log("Response", res)
         } catch (error: any) {
-            console.error(error.code, error.message)
-
             switch (error.code) {
                 case "auth/email-already-in-use":
                     setAuthError("Email already in use.")
